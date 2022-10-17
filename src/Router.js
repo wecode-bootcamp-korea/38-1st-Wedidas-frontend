@@ -11,20 +11,18 @@ import Footer from './components/Footer/Footer';
 
 const Router = () => {
   return (
-    <>
+    <BrowserRouter>
       <Nav />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/itemlist" element={<Itemlist />} />
-          <Route path="/detail" element={<Itemdetail />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/itemlist" element={<Itemlist />} />
+        <Route path="/detail" element={<Itemdetail />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
       <Footer />
-    </>
+    </BrowserRouter>
   );
 };
 
