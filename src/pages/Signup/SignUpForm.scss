@@ -1,0 +1,11 @@
+@import '../../styles/variable';
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  width: 478px;
+
+  .signUpText {
+    font-size: 40px;
+  }
+}
