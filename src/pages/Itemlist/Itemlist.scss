@@ -1,0 +1,12 @@
+.itemList {
+  padding: 40px 10px 10px 10px;
+
+  .itemListProducts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 1200px;
+    width: 1fr;
+    margin: 0 auto;
+    padding: 10px;
+  }
+}
