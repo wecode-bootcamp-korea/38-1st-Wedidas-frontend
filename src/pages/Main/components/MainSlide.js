@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
+import ItemProduct from '../../../components/ItemProduct/ItemProduct';
 import './MainSlide.scss';
 
 const TOTAL_SLIDES = 3;
@@ -49,9 +50,7 @@ const MainSlide = () => {
       <div className="slideContainer">
         <div className="slideWrap" ref={slideRef}>
           {sources.map(source => (
-            <li className="slideItem" key={source.id}>
-              <img src={source.src} />
-            </li>
+            <ItemProduct className="slideItem" key={source.id} data={source} />
           ))}
         </div>
       </div>

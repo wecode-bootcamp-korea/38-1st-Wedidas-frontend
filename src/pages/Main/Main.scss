@@ -12,18 +12,14 @@
 
       img {
         position: absolute;
-        z-index: 0;
         top: 0;
         left: 0;
         width: 100vw;
         height: 90vh;
-        transition: all 0.5s;
-        opacity: 0;
         object-fit: cover;
       }
-      .first {
+      .show {
         z-index: 1;
-        opacity: 1;
       }
     }
     .titleBox {
