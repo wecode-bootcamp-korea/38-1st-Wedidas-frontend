@@ -1,12 +1,6 @@
-import Slide from './components/Slide';
-import MainKv from './components/MainKv';
+import React from 'react';
 import './Main.scss';
 const Main = () => {
-  return (
-    <div className="main">
-      <MainKv />
-      <Slide />
-    </div>
-  );
+  return <></>;
 };
 export default Main;
