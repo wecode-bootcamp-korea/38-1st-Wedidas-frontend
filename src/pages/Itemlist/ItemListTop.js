@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineRollback } from 'react-icons/ai';
 import { ImEqualizer } from 'react-icons/im';
 import './ItemListTop.scss';
+
 const ItemListTop = ({ clickFilter }) => {
   const navigate = useNavigate();
   const clickBack = () => {
-    navigate('./../');
+    navigate(-1);
   };
 
   const clickGoMain = () => {
     navigate('/');
   };
+
   return (
     <div className="itemListTop">
       <div className="itemListTopToolBox">

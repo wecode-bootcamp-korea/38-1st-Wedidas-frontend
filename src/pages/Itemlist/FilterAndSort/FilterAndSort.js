@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './FilterAndSort.scss';
 import { AiOutlineClose } from 'react-icons/ai';
+import './FilterAndSort.scss';
 
 const FilterAndSort = ({ setIsFilter }) => {
   const [isSelected, setIsSelected] = useState({
@@ -32,61 +32,52 @@ const FilterAndSort = ({ setIsFilter }) => {
       <div className="filterAndSortHeader">
         <span>Filter & Sort</span>
         <div className="filterAndSortBtnBox">
-          <a href="#" className="filterAndSortReset" onClick={clickReset}>
+          <button className="filterAndSortReset" onClick={clickReset}>
             모두지우기
-          </a>
-          <a onClick={clickClose} href="#" className="filterAndSortClose">
-            <AiOutlineClose />
-          </a>
+          </button>
+          <AiOutlineClose onClick={clickClose} className="filterAndSortClose" />
         </div>
       </div>
       <ul>
-        <a
-          href="#"
-          className={
-            isSelected.latest
-              ? 'filterAndSortList selected'
-              : 'filterAndSortList'
-          }
+        <button
+          className={`filterAndSortList ${
+            isSelected.latest ? 'selected' : 'bordernone'
+          }`}
           onClick={handleSelected}
           name="latest"
         >
+          {' '}
           최근 순
-        </a>
-        <a
-          href="#"
-          className={
-            isSelected.lowprice
-              ? 'filterAndSortList selected'
-              : 'filterAndSortList'
-          }
+        </button>
+        <button
+          className={`filterAndSortList ${
+            isSelected.lowprice ? 'selected' : 'bordernone'
+          }`}
           onClick={handleSelected}
           name="lowprice"
         >
           가격 낮은 순
-        </a>
-        <a
+        </button>
+        <button
           href="#"
+          className={`filterAndSortList ${
+            isSelected.highprice ? 'selected' : 'bordernone'
+          }`}
           onClick={handleSelected}
-          className={
-            isSelected.highprice
-              ? 'filterAndSortList selected'
-              : 'filterAndSortList'
-          }
           name="highprice"
         >
           가격 높은 순
-        </a>
-        <a
+        </button>
+        <button
           href="#"
-          className={
-            isSelected.size ? 'filterAndSortList selected' : 'filterAndSortList'
-          }
+          className={`filterAndSortList ${
+            isSelected.size ? 'selected' : 'bordernone'
+          }`}
           onClick={handleSelected}
           name="size"
         >
           사이즈
-        </a>
+        </button>
         <input type="checkbox" />
       </ul>
     </div>

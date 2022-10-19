@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './Itemlist.scss';
 import ItemListTop from './ItemListTop';
 import ItemProduct from '../../components/ItemProduct/ItemProduct';
 import FilterAndSort from './FilterAndSort/FilterAndSort';
+import './Itemlist.scss';
 
 const Itemlist = () => {
   const [shoesData, setShoesData] = useState([]);
