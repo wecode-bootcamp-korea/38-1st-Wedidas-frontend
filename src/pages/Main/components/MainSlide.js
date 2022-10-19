@@ -7,7 +7,6 @@ const MainSlide = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sources, setSources] = useState([]);
   const slideRef = useRef(null);
-  const listRef = useRef(null);
   useEffect(() => {
     fetch('data/MainSlide.json', {
       method: 'GET',
@@ -38,7 +37,7 @@ const MainSlide = () => {
   useEffect(() => {
     slideRef.current.style.transition = 'all 0.7s ease-in-out';
     slideRef.current.style.transform = `translateX(-${currentSlide * 25}%)`;
-  }, [currentSlide, listRef]);
+  }, [currentSlide]);
 
   const moveDot = index => {
     setCurrentSlide(index);
@@ -50,7 +49,7 @@ const MainSlide = () => {
       <div className="slideContainer">
         <div className="slideWrap" ref={slideRef}>
           {sources.map(source => (
-            <li ref={listRef} className="slideItem" key={source.id}>
+            <li className="slideItem" key={source.id}>
               <img src={source.src} />
             </li>
           ))}
