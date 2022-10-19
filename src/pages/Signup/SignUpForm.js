@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignUpForm.scss';
+
 const SignUpForm = () => {
   const [userInfo, setUserInfo] = useState({
     email: '',
@@ -15,24 +16,26 @@ const SignUpForm = () => {
       [name]: value,
     });
   };
+
   const signUp = event => {
     event.preventDefault();
-    fetch('api', {
+    fetch('http://10.58.52.133:3000/users/signup', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         email: userInfo.email,
         password: userInfo.password,
         name: userInfo.name,
-        birthday: parseInt(userInfo.birthday),
-        phone_number: parseInt(userInfo.phone_number),
+        birthday: userInfo.birthday,
+        phoneNumber: userInfo.phone_number,
+        point: 300000,
       }),
     });
   };
 
   return (
     <form onSubmit={signUp} className="signUpForm">
-      <h3 className="signUpText">회원가입</h3>
+      <p className="signUpText">회원가입</p>
       <input
         className="inputBox"
         placeholder="이름을 입력하세요"

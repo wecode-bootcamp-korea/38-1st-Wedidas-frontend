@@ -4,7 +4,7 @@ import './SignUpContent.scss';
 const SignUpContent = () => {
   return (
     <div className="signUpContent">
-      <h3 className="freeSignUpText">아디클럽 무료 가입</h3>
+      <p className="freeSignUpText">아디클럽 무료 가입</p>
       <ul className="benefitBox">
         <li className="benefitBoxList">
           <span className="freeDeliverIcon" />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Signupform from './SignUpForm';
-import './Signup.scss';
 import Signupcontent from './SignUpContent';
+import './Signup.scss';
 
 const Signup = () => {
   return (
