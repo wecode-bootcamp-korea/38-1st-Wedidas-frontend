@@ -62,7 +62,7 @@ const Nav = () => {
   const [womenShown, setWomenShown] = useState(false);
 
   return (
-    <>
+    <div className="navComponent">
       <nav className="nav">
         <div className="navBox">
           <div className="upperNavBox">
@@ -191,7 +191,7 @@ const Nav = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
