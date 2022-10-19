@@ -146,7 +146,7 @@ const Nav = () => {
                 <div key={mock.id} className="mock">
                   <a href={mock.shoes.url}>{mock.shoes.name}</a>
                   {mock.shoesCategory.map(el => (
-                    <a className={mock.id}>{el}</a>
+                    <a className={mock.classname}>{el}</a>
                   ))}
                 </div>
               ))}

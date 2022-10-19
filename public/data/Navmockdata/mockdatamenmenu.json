@@ -7,7 +7,8 @@
       "url": "/shoes"
     },
     "shoesCategory": ["오리지널스", "러닝", "슬리퍼"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "mshoes"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
       "url": "/cloths"
     },
     "shoesCategory": ["자켓", "축구 저지", "후디/스웨트셔츠"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "mattires"
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
       "url": "/accessories"
     },
     "shoesCategory": ["양말", "모자", "가방"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "maccessories"
   },
   {
     "id": 4,
@@ -37,6 +40,7 @@
       "url": "/sports"
     },
     "shoesCategory": ["러닝", "아웃도어", "트레이닝"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "msports"
   }
 ]
