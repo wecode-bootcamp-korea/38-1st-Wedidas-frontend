@@ -8,21 +8,11 @@ import { RiShoppingBagLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 const Nav = () => {
-  const [modalOpen, setModalOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [layout, setLayout] = useState([]);
   const [underLayout, setUnderLayout] = useState([]);
   const [wlayout, setWLayout] = useState([]);
   const [wunderLayout, setWunderLayout] = useState([]);
-
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-
   const onSearch = event => {
     event.preventDefault();
     setSearch(event.target.value);
@@ -76,9 +66,7 @@ const Nav = () => {
       <nav className="nav">
         <div className="navBox">
           <div className="upperNavBox">
-            <button className="leftNotice" onClick={openModal}>
-              가입/로그인/배송지 입력 안내
-            </button>
+            <button className="leftNotice">가입/로그인/배송지 입력 안내</button>
             <button className="middleNotice">
               회원가입 10% 쿠폰 및 생일 쿠폰 지급 관련 기준 안내
             </button>
@@ -99,12 +87,17 @@ const Nav = () => {
             <div className="logo">Wedidas</div>
             <div className="mainMenu">
               <ul className="mainMenuListing">
-                <li className="menuMen" onMouseEnter={() => setMenShown(true)}>
+                <li
+                  className="menuMen"
+                  onMouseEnter={() => setMenShown(true)}
+                  onMouseOver={() => setWomenShown(false)}
+                >
                   MEN
                 </li>
                 <li
                   className="menuWomen"
                   onMouseEnter={() => setWomenShown(true)}
+                  onMouseOver={() => setMenShown(false)}
                 >
                   WOMEN
                 </li>
@@ -169,6 +162,8 @@ const Nav = () => {
             </div>
           )}
         </div>
+      </div>
+      <div className="hoverWholeBox">
         <div
           className="womenhoverContainer"
           onMouseLeave={() => setWomenShown(false)}
