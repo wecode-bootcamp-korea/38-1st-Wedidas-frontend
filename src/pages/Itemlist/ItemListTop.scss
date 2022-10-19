@@ -42,6 +42,7 @@
   .itemListTopBack {
     font-size: 14px;
   }
+
   .itemListTopFlex {
     @include flex(space-between, center, null);
     height: 65px;

@@ -9,6 +9,7 @@ const FilterAndSort = ({ setIsFilter }) => {
     highprice: false,
     size: false,
   });
+
   const handleSelected = event => {
     const { name } = event.target;
     setIsSelected({
@@ -16,9 +17,11 @@ const FilterAndSort = ({ setIsFilter }) => {
       [name]: !isSelected[name],
     });
   };
+
   const clickClose = () => {
     setIsFilter(false);
   };
+
   const clickReset = () => {
     setIsSelected({
       latest: false,
@@ -46,7 +49,6 @@ const FilterAndSort = ({ setIsFilter }) => {
           onClick={handleSelected}
           name="latest"
         >
-          {' '}
           최근 순
         </button>
         <button
