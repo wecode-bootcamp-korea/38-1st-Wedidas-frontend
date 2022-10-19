@@ -1,32 +1,73 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Login.scss';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsCheck2, BsArrowRight } from 'react-icons/bs';
+import './Login.scss';
 
 const Login = () => {
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const navigate = useNavigate();
+
+  const onChangeId = event => setId(event.target.value);
+  const onChangePw = event => setPw(event.target.value);
+  const handleOnsubmit = e => {
+    e.preventDefault();
+
+    fetch('http://10.58.52.140:3000/auth/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        email: id,
+        password: pw,
+      }),
+    })
+      .then(response => {
+        if (response.ok === true) {
+          return response.json();
+        }
+        throw new Error('통신실패');
+      })
+      .then(data => {
+        if (data.message === 'INVALID_PASSWORD') {
+          alert('비밀번호를 확인해 주세요.');
+        } else {
+          localStorage.setItem('token', data.accessToken);
+          navigate('/');
+        }
+      });
+  };
+
   return (
     <div className="login">
       <div className="loginSection">
-        <h2 className="title">로그인</h2>
+        <p className="title">로그인</p>
         <Link className="findPw" to="#!">
           비밀번호를 잊으셨나요
         </Link>
-        <form className="loginBox">
+        <form className="loginBox" onSubmit={handleOnsubmit}>
           <div className="inputBox">
             <input
               className="input emailInput"
               type="email"
               placeholder="이메일 *"
+              value={id}
+              onChange={onChangeId}
             />
-            <span>사용가능한 이메일 주소를 사용해 주세요</span>
+            <span className="alert">
+              사용가능한 이메일 주소를 사용해 주세요
+            </span>
           </div>
           <div className="inputBox">
             <input
               className="input pwInput"
               type="password"
               placeholder="비밀번호 *"
+              value={pw}
+              onChange={onChangePw}
             />
-            <span>패스워드를 입력하세요</span>
+            <span className="alert">패스워드를 입력하세요</span>
           </div>
 
           <button className="btn loginBtn">
@@ -36,7 +77,7 @@ const Login = () => {
         </form>
       </div>
       <div className="signUpBox">
-        <h2 className="title">가입하기</h2>
+        <p className="title">가입하기</p>
         <p>아디다스 클럽 멤버십 가입하기 : </p>
         <ul className="signUpListWrap">
           <li>

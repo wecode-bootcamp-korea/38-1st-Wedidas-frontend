@@ -1,10 +1,12 @@
-import React from 'react';
+import Slide from './components/Slide';
+import MainKv from './components/MainKv';
 import './Main.scss';
 const Main = () => {
   return (
-    <>
-      <h1>메인페이지입니다.</h1>
-    </>
+    <div className="main">
+      <MainKv />
+      <Slide />
+    </div>
   );
 };
 export default Main;
