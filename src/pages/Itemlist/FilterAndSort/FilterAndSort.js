@@ -30,6 +30,7 @@ const FilterAndSort = ({ setIsFilter }) => {
       size: false,
     });
   };
+
   return (
     <div className="filterAndSort">
       <div className="filterAndSortHeader">

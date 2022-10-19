@@ -7,17 +7,20 @@ import './Itemlist.scss';
 const Itemlist = () => {
   const [shoesData, setShoesData] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
+
   useEffect(() => {
     fetch('/data/itemlist.json')
       .then(res => res.json())
       .then(res => setShoesData(res));
   }, []);
+
   const handleWindow = e => {
     const clicked = e.target.closest('.filterAndSort');
     if (clicked === null && isFilter) {
       setIsFilter(prev => !prev);
     }
   };
+
   const clickFilter = () => {
     setIsFilter(prev => !prev);
   };
