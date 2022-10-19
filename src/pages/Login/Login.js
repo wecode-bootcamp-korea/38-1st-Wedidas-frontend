@@ -4,23 +4,24 @@ import { BsCheck2, BsArrowRight } from 'react-icons/bs';
 import './Login.scss';
 
 const Login = () => {
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
+  const [userInfoValue, setUserInfoValue] = useState({ email: '', pw: '' });
   const navigate = useNavigate();
 
-  const onChangeId = event => setId(event.target.value);
-  const onChangePw = event => setPw(event.target.value);
+  const onChangeId = event =>
+    setUserInfoValue({ ...userInfoValue, email: event.target.value });
+  const onChangePw = event =>
+    setUserInfoValue({ ...userInfoValue, pw: event.target.value });
   const handleOnsubmit = e => {
     e.preventDefault();
 
-    fetch('http://10.58.52.140:3000/auth/signin', {
+    fetch('http://10.58.52.133:3000/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify({
-        email: id,
-        password: pw,
+        email: userInfoValue.email,
+        password: userInfoValue.pw,
       }),
     })
       .then(response => {
@@ -38,7 +39,8 @@ const Login = () => {
         }
       });
   };
-
+  // const token = localStorage.getItem('token');
+  // console.log(token);
   return (
     <div className="login">
       <div className="loginSection">
@@ -52,7 +54,7 @@ const Login = () => {
               className="input emailInput"
               type="email"
               placeholder="이메일 *"
-              value={id}
+              value={userInfoValue.email}
               onChange={onChangeId}
             />
             <span className="alert">
@@ -64,7 +66,7 @@ const Login = () => {
               className="input pwInput"
               type="password"
               placeholder="비밀번호 *"
-              value={pw}
+              value={userInfoValue.pw}
               onChange={onChangePw}
             />
             <span className="alert">패스워드를 입력하세요</span>
