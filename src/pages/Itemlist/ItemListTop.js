@@ -1,29 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineRollback } from 'react-icons/ai';
 import { ImEqualizer } from 'react-icons/im';
-import FilterAndSort from './FilterAndSort/FilterAndSort';
 import './ItemListTop.scss';
-const ItemListTop = () => {
-  const [isFilter, setIsFilter] = useState(false);
-  const ref = useRef();
+const ItemListTop = ({ clickFilter }) => {
   const navigate = useNavigate();
-  const clickFilter = () => {
-    setIsFilter(prev => !prev);
-  };
-
-  useEffect(() => {
-    const clickOutside = e => {
-      if (isFilter && ref.current && !ref.current.contains(e.target)) {
-        setIsFilter(false);
-      }
-    };
-    document.addEventListener('mousedown', clickOutside);
-    return () => {
-      document.removeEventListener('mousedown', clickOutside);
-    };
-  }, [isFilter]);
-
   const clickBack = () => {
     navigate('./../');
   };
@@ -32,7 +13,7 @@ const ItemListTop = () => {
     navigate('/');
   };
   return (
-    <div ref={ref} className="itemListTop">
+    <div className="itemListTop">
       <div className="itemListTopToolBox">
         <span className="itemListTopBack underLine" onClick={clickBack}>
           <AiOutlineRollback />
@@ -53,7 +34,6 @@ const ItemListTop = () => {
           <ImEqualizer />
         </button>
       </div>
-      {isFilter && <FilterAndSort setIsFilter={setIsFilter} />}
     </div>
   );
 };

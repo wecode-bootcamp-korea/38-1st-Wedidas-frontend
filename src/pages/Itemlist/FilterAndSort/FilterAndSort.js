@@ -87,6 +87,7 @@ const FilterAndSort = ({ setIsFilter }) => {
         >
           사이즈
         </a>
+        <input type="checkbox" />
       </ul>
     </div>
   );
