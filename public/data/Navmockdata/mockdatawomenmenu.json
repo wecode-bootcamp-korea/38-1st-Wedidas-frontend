@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "gender": "여성",
+    "shoes": {
+      "name": "신발",
+      "url": "/womenShoes"
+    },
+    "shoesCategory": ["오리지널스", "러닝", "슬리퍼"],
+    "shoesLink": ["/womenOriginals", "/womenRunning", "/womenSlippers"]
+  },
+  {
+    "id": 2,
+    "gender": "여성",
+    "shoes": {
+      "name": "의류",
+      "url": "/cloths"
+    },
+    "shoesCategory": ["자켓", "축구 저지", "후디/스웨트셔츠"],
+    "shoesLink": ["./originals", "./running", "./slippers"]
+  },
+  {
+    "id": 3,
+    "gender": "여성",
+    "shoes": {
+      "name": "용품",
+      "url": "/accessories"
+    },
+    "shoesCategory": ["양말", "모자", "가방"],
+    "shoesLink": ["./originals", "./running", "./slippers"]
+  },
+  {
+    "id": 4,
+    "gender": "여성",
+    "shoes": {
+      "name": "스포츠",
+      "url": "/sports"
+    },
+    "shoesCategory": ["러닝", "아웃도어", "트레이닝"],
+    "shoesLink": ["./originals", "./running", "./slippers"]
+  }
+]
