@@ -29,16 +29,7 @@
     }
   }
 
-  .freeDeliverIcon {
+  .icon {
     @include icon;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/819/819873.png');
-  }
-  .couponIcon {
-    @include icon;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/7526/7526142.png');
-  }
-  .savingIcon {
-    @include icon;
-    background-image: url('https://cdn-icons-png.flaticon.com/512/1038/1038040.png');
   }
 }

@@ -1,4 +1,8 @@
 import React from 'react';
+import { FaTruck } from 'react-icons/fa';
+import { RiCoupon3Line } from 'react-icons/ri';
+import { GrMoney } from 'react-icons/gr';
+
 import './SignUpContent.scss';
 
 const SignUpContent = () => {
@@ -7,16 +11,16 @@ const SignUpContent = () => {
       <p className="freeSignUpText">아디클럽 무료 가입</p>
       <ul className="benefitBox">
         <li className="benefitBoxList">
-          <span className="freeDeliverIcon" />
-          <h6>5만원 이상 무료배송</h6>
+          <FaTruck className="icon" />
+          <p>5만원 이상 무료배송</p>
         </li>
         <li className="benefitBoxList">
-          <span className="couponIcon" />
-          <h6>할인쿠폰</h6>
+          <RiCoupon3Line className="icon" />
+          <p>할인쿠폰</p>
         </li>
         <li className="benefitBoxList">
-          <span className="savingIcon" />
-          <h6>포인트 적립</h6>
+          <GrMoney className="icon" />
+          <p>포인트 적립</p>
         </li>
       </ul>
       <p>
