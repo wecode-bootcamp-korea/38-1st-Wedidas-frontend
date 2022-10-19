@@ -1,15 +1,14 @@
 import React from 'react';
-import './ItemProduct.scss';
+import { Link } from 'react-router-dom';
 import { CiHeart } from 'react-icons/ci';
+import './ItemProduct.scss';
 
 const ItemProduct = ({ data }) => {
   return (
     <div className="itemProduct">
-      <a href="#">
+      <Link>
         <div className="itemProductImgBox">
-          <span className="heartIcon">
-            <CiHeart />
-          </span>
+          <CiHeart className="heartIcon" />
           <img className="itemProductImg" src={data.thumbnail} alt="신발사진" />
           <p className="itemPrice">{data.price}</p>
         </div>
@@ -17,7 +16,7 @@ const ItemProduct = ({ data }) => {
           <p className="itemName">{data.name}</p>
           <p className="itemCategory">{data.categoryname}</p>
         </div>
-      </a>
+      </Link>
     </div>
   );
 };
