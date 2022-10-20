@@ -1,60 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import './Nav.scss';
-import '../../styles/reset.scss';
-import '../../styles/common.scss';
+import { Link } from 'react-router-dom';
 import { SlMagnifier } from 'react-icons/sl';
 import { BiUser, BiHeart } from 'react-icons/bi';
 import { RiShoppingBagLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import './Nav.scss';
+import '../../styles/reset.scss';
+import '../../styles/common.scss';
 
 const Nav = () => {
   const [search, setSearch] = useState('');
-  const [layout, setLayout] = useState([]);
-  const [underLayout, setUnderLayout] = useState([]);
-  const [wlayout, setWLayout] = useState([]);
-  const [wunderLayout, setWunderLayout] = useState([]);
+  const [mockDataFetch, setMockDataFetch] = useState([]);
+
   const onSearch = event => {
     event.preventDefault();
     setSearch(event.target.value);
   };
 
   useEffect(() => {
-    fetch('/data/Navmockdata/mockdatamenmenu.json', {
+    fetch('/data/Navmockdata/navmockdata.json', {
       method: 'GET',
     })
       .then(res => res.json())
       .then(data => {
-        setLayout(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/data/Navmockdata/mockdatamenmenu2.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setUnderLayout(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/data/Navmockdata/mockdatawomenmenu.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setWLayout(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    fetch('/data/Navmockdata/mockdatawomenmenu2.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setWunderLayout(data);
+        setMockDataFetch(data);
       });
   }, []);
 
@@ -74,10 +43,18 @@ const Nav = () => {
           </div>
           <div className="middleNavBox">
             <div className="assistSection">
-              <a href="/help">도움말</a>
-              <a href="/refund">반품</a>
-              <a href="/orders">주문조회</a>
-              <a href="/signup">아디클럽 가입하기</a>
+              <Link className="link" to="/help">
+                도움말
+              </Link>
+              <Link className="link" to="/refund">
+                반품
+              </Link>
+              <Link className="link" to="/orders">
+                주문조회
+              </Link>
+              <Link className="link" to="/signup">
+                아디클럽 가입하기
+              </Link>
             </div>
           </div>
           <div className="lowerNavBox">
@@ -121,15 +98,15 @@ const Nav = () => {
                 </form>
               </div>
               <div className="iconWrapper">
-                <a href="/signup">
+                <Link to="/signup">
                   <BiUser className="iconUser" />
-                </a>
-                <a href="/wishlist">
+                </Link>
+                <Link to="/wishlist">
                   <BiHeart className="iconHeart" />
-                </a>
-                <a href="/shoppingbag">
+                </Link>
+                <Link to="/shoppingbag">
                   <RiShoppingBagLine className="iconBag" />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -142,23 +119,35 @@ const Nav = () => {
         >
           {menShown && (
             <div className="hoverContainer">
-              {layout.map(mock => (
-                <div key={mock.id} className="mock">
-                  <a href={mock.shoes.url}>{mock.shoes.name}</a>
-                  {mock.shoesCategory.map(el => (
-                    <a className={mock.classname}>{el}</a>
-                  ))}
-                </div>
-              ))}
+              {mockDataFetch
+                .filter(mockDataFetch => mockDataFetch.id < 5)
+                .map(data => (
+                  <div key={data.id} className="mock">
+                    <Link to={data.shoes.url}>{data.shoes.name}</Link>
+                    {data.shoesCategory.map(el => (
+                      <Link to={data.shoesLink} className={data.classname}>
+                        {el}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
             </div>
           )}
           {menShown && (
             <div className="underLayOut">
-              {underLayout.map(mock2 => (
-                <a key={mock2.id} className={mock2.id} href={mock2.shoes.url}>
-                  {mock2.shoes.name}
-                </a>
-              ))}
+              {mockDataFetch
+                .filter(
+                  mockDataFetch => mockDataFetch.id < 14 && mockDataFetch.id > 8
+                )
+                .map(mock2 => (
+                  <Link
+                    key={mock2.id}
+                    className={mock2.id}
+                    to={mock2.shoes.url}
+                  >
+                    {mock2.shoes.name}
+                  </Link>
+                ))}
             </div>
           )}
         </div>
@@ -170,23 +159,33 @@ const Nav = () => {
         >
           {womenShown && (
             <div className="hoverContainer">
-              {wlayout.map(mock => (
-                <div key={mock.id} className="mock">
-                  <a href={mock.shoes.url}>{mock.shoes.name}</a>
-                  {mock.shoesCategory.map(el => (
-                    <a className={mock.id}>{el}</a>
-                  ))}
-                </div>
-              ))}
+              {mockDataFetch
+                .filter(
+                  mockDataFetch => mockDataFetch.id > 4 && mockDataFetch.id < 9
+                )
+                .map(mock => (
+                  <div key={mock.id} className="mock">
+                    <Link to={mock.shoes.url}>{mock.shoes.name}</Link>
+                    {mock.shoesCategory.map(el => (
+                      <Link className={mock.id}>{el}</Link>
+                    ))}
+                  </div>
+                ))}
             </div>
           )}
           {womenShown && (
             <div className="underLayOut">
-              {wunderLayout.map(mock2 => (
-                <a key={mock2.id} className={mock2.id} href={mock2.shoes.url}>
-                  {mock2.shoes.name}
-                </a>
-              ))}
+              {mockDataFetch
+                .filter(mockDataFetch => mockDataFetch.id > 13)
+                .map(mock2 => (
+                  <Link
+                    key={mock2.id}
+                    className={mock2.id}
+                    href={mock2.shoes.url}
+                  >
+                    {mock2.shoes.name}
+                  </Link>
+                ))}
             </div>
           )}
         </div>
