@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BsCheck2, BsArrowRight } from 'react-icons/bs';
+import { BsCheck2 } from 'react-icons/bs';
+import Button from '../../components/Button/Button';
 import './Login.scss';
 
 const Login = () => {
@@ -74,10 +75,7 @@ const Login = () => {
             <span className="alert">패스워드를 입력하세요</span>
           </div>
 
-          <button className="btn loginBtn">
-            로그인
-            <BsArrowRight className="arrow" />
-          </button>
+          <Button btnTitle="로그인" className="loginBtn" />
         </form>
       </div>
       <div className="signUpBox">
@@ -106,10 +104,7 @@ const Login = () => {
           <br />
           아디다스의 베스트 제품을 지금 만나보세요.
         </p>
-        <button className="btn signupBtn">
-          가입하기
-          <BsArrowRight className="arrow" />
-        </button>
+        <Button btnTitle="가입하기" className="signupBtn" />
       </div>
     </div>
   );
