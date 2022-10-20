@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import './FilterAndSort.scss';
 
 const FilterAndSort = ({ setIsFilter }) => {
+  const navigate = useNavigate();
   const [isSelected, setIsSelected] = useState({
     latest: false,
     lowprice: false,
@@ -82,6 +84,7 @@ const FilterAndSort = ({ setIsFilter }) => {
           사이즈
         </button>
         <input type="checkbox" />
+        {/* <button onClick={onClick}>클릭하세요</button> */}
       </ul>
     </div>
   );
