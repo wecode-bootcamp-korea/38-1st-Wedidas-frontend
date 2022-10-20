@@ -5,7 +5,7 @@
   position: relative;
   width: 720px;
   height: 240px;
-  margin-top: 40px;
+  margin-top: 60px;
   border: 1px solid #767677;
 
   .cartItemImg {
@@ -29,6 +29,7 @@
       margin-bottom: 10px;
     }
   }
+
   .cartItemSelect {
     @include flex(space-around, center, null);
     width: 100px;
@@ -36,11 +37,13 @@
     border: 1px solid #000;
     background-color: #fff;
   }
+
   .selectList {
     position: absolute;
-    top: 207px;
+    z-index: 1;
+    top: 206px;
     width: 100px;
-    height: 224px;
+    height: 200px;
     overflow: scroll;
     border: 1px solid #000;
     background-color: #fff;
@@ -49,7 +52,6 @@
       height: 56px;
       padding-top: 20px;
       padding-left: 20px;
-      border-bottom: 1px solid #000;
     }
   }
 }

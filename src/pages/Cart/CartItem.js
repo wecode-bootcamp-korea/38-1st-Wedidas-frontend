@@ -4,12 +4,27 @@ import { CiHeart } from 'react-icons/ci';
 import { SlArrowDown } from 'react-icons/sl';
 import './CartItem.scss';
 
-const CartItem = ({ data, isSelect, setIsSelect }) => {
+const CartItem = ({ data }) => {
+  const [isSelect, setIsSelect] = useState(false);
+  const [numberOfShoe, setNumberOfShoe] = useState('1');
+
+  const numberOfShoeClick = e => {
+    setNumberOfShoe(e.target.value);
+    setIsSelect(false);
+  };
+
   const clickSelectBtn = () => {
     setIsSelect(prev => !prev);
   };
+
+  const clickOutside = e => {
+    if (e.target.className !== '.selectList' && isSelect) {
+      setIsSelect(false);
+    }
+  };
+
   return (
-    <div className="cartItem">
+    <div className="cartItem" onClick={clickOutside}>
       <div>
         <img
           className="cartItemImg"
@@ -22,7 +37,7 @@ const CartItem = ({ data, isSelect, setIsSelect }) => {
           <div className="cartItemXbox">
             <div>
               <span className="cartItemName">{data.name}</span>
-              <span calssName="cartItemPrice">{data.price}원</span>
+              <span className="cartItemPrice">{data.price}원</span>
             </div>
             <AiOutlineClose />
           </div>
@@ -33,20 +48,38 @@ const CartItem = ({ data, isSelect, setIsSelect }) => {
           <p>크기 : 210</p>
         </div>
         <button onClick={clickSelectBtn} className="cartItemSelect">
-          <p>1</p>
+          {numberOfShoe}
           <SlArrowDown />
         </button>
         {isSelect && (
-          <ul className="selectList">
-            <li className="listItem">1</li>
-            <li className="listItem">2</li>
-            <li className="listItem">3</li>
-            <li className="listItem">4</li>
-            <li className="listItem">5</li>
-            <li className="listItem">6</li>
-            <li className="listItem">7</li>
-            <li className="listItem">8</li>
-            <li className="listItem">9</li>
+          <ul className="selectList" onClick={numberOfShoeClick}>
+            <li className="listItem" value="1">
+              1
+            </li>
+            <li className="listItem" value="2">
+              2
+            </li>
+            <li className="listItem" value="3">
+              3
+            </li>
+            <li className="listItem" value="4">
+              4
+            </li>
+            <li className="listItem" value="5">
+              5
+            </li>
+            <li className="listItem" value="6">
+              6
+            </li>
+            <li className="listItem" value="7">
+              7
+            </li>
+            <li className="listItem" value="8">
+              8
+            </li>
+            <li className="listItem" value="9">
+              9
+            </li>
           </ul>
         )}
       </div>
