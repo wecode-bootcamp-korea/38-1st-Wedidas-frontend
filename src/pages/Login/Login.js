@@ -7,10 +7,11 @@ const Login = () => {
   const [userInfoValue, setUserInfoValue] = useState({ email: '', pw: '' });
   const navigate = useNavigate();
 
-  const onChangeId = event =>
-    setUserInfoValue({ ...userInfoValue, email: event.target.value });
-  const onChangePw = event =>
-    setUserInfoValue({ ...userInfoValue, pw: event.target.value });
+  const onChangeUserInfoValue = event =>
+    setUserInfoValue({
+      ...userInfoValue,
+      [event.target.name]: event.target.value,
+    });
   const handleOnsubmit = e => {
     e.preventDefault();
 
@@ -39,8 +40,7 @@ const Login = () => {
         }
       });
   };
-  // const token = localStorage.getItem('token');
-  // console.log(token);
+
   return (
     <div className="login">
       <div className="loginSection">
@@ -53,9 +53,10 @@ const Login = () => {
             <input
               className="input emailInput"
               type="email"
+              name="email"
               placeholder="이메일 *"
               value={userInfoValue.email}
-              onChange={onChangeId}
+              onChange={onChangeUserInfoValue}
             />
             <span className="alert">
               사용가능한 이메일 주소를 사용해 주세요
@@ -65,9 +66,10 @@ const Login = () => {
             <input
               className="input pwInput"
               type="password"
+              name="pw"
               placeholder="비밀번호 *"
               value={userInfoValue.pw}
-              onChange={onChangePw}
+              onChange={onChangeUserInfoValue}
             />
             <span className="alert">패스워드를 입력하세요</span>
           </div>
@@ -80,26 +82,26 @@ const Login = () => {
       </div>
       <div className="signUpBox">
         <p className="title">가입하기</p>
-        <p>아디다스 클럽 멤버십 가입하기 : </p>
+        <p className="description">아디다스 클럽 멤버십 가입하기 : </p>
         <ul className="signUpListWrap">
-          <li>
+          <li className="checkList">
             <BsCheck2 className="checkIcon" />
             멤버 레벨의 모든 리워드를 바로 누리세요
           </li>
-          <li>
+          <li className="checkList">
             <BsCheck2 className="checkIcon" />
             한정판 제품 구입 기회 제공
           </li>
-          <li>
+          <li className="checkList">
             <BsCheck2 className="checkIcon" />
             스포츠, 요가, 뮤직 이벤트 참여를 위해 레벨업 하세요
           </li>
-          <li>
+          <li className="checkList">
             <BsCheck2 className="checkIcon" />
             아디클럽 멤버를 위한 특별한 혜택과 이벤트를 만나보세요
           </li>
         </ul>
-        <p>
+        <p className="description">
           각 레벨별 리워드를 받기 위해 지금 가입하여 포인트를 쌓으세요.
           <br />
           아디다스의 베스트 제품을 지금 만나보세요.
