@@ -120,14 +120,12 @@ const Nav = () => {
           {menShown && (
             <div className="hoverContainer">
               {mockDataFetch
-                .filter(mockDataFetch => mockDataFetch.id < 5)
+                .filter(mockDataFetch => mockDataFetch.gender === '남성')
                 .map(data => (
                   <div key={data.id} className="mock">
                     <Link to={data.shoes.url}>{data.shoes.name}</Link>
                     {data.shoesCategory.map(el => (
-                      <Link to={data.shoesLink} className={data.classname}>
-                        {el}
-                      </Link>
+                      <Link className={data.id}>{el}</Link>
                     ))}
                   </div>
                 ))}
@@ -136,16 +134,12 @@ const Nav = () => {
           {menShown && (
             <div className="underLayOut">
               {mockDataFetch
-                .filter(
-                  mockDataFetch => mockDataFetch.id < 14 && mockDataFetch.id > 8
+                .filter(mockDataFetch =>
+                  mockDataFetch.shoes.name.includes('남성')
                 )
-                .map(mock2 => (
-                  <Link
-                    key={mock2.id}
-                    className={mock2.id}
-                    to={mock2.shoes.url}
-                  >
-                    {mock2.shoes.name}
+                .map(data => (
+                  <Link key={data.id} className={data.id} to={data.shoes.url}>
+                    {data.shoes.name}
                   </Link>
                 ))}
             </div>
@@ -160,14 +154,12 @@ const Nav = () => {
           {womenShown && (
             <div className="hoverContainer">
               {mockDataFetch
-                .filter(
-                  mockDataFetch => mockDataFetch.id > 4 && mockDataFetch.id < 9
-                )
-                .map(mock => (
-                  <div key={mock.id} className="mock">
-                    <Link to={mock.shoes.url}>{mock.shoes.name}</Link>
-                    {mock.shoesCategory.map(el => (
-                      <Link className={mock.id}>{el}</Link>
+                .filter(mockDataFetch => mockDataFetch.gender === '여성')
+                .map(data => (
+                  <div key={data.id} className="mock">
+                    <Link to={data.shoes.url}>{data.shoes.name}</Link>
+                    {data.shoesCategory.map(el => (
+                      <Link className={data.id}>{el}</Link>
                     ))}
                   </div>
                 ))}
@@ -176,14 +168,12 @@ const Nav = () => {
           {womenShown && (
             <div className="underLayOut">
               {mockDataFetch
-                .filter(mockDataFetch => mockDataFetch.id > 13)
-                .map(mock2 => (
-                  <Link
-                    key={mock2.id}
-                    className={mock2.id}
-                    href={mock2.shoes.url}
-                  >
-                    {mock2.shoes.name}
+                .filter(mockDataFetch =>
+                  mockDataFetch.shoes.name.includes('여성')
+                )
+                .map(data => (
+                  <Link key={data.id} className={data.id} to={data.shoes.url}>
+                    {data.shoes.name}
                   </Link>
                 ))}
             </div>
