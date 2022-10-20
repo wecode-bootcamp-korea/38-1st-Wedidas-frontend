@@ -1,15 +1,18 @@
 .mainSlide {
   margin-bottom: 100px;
   padding-bottom: 30px;
+
   .slideContainer {
     max-width: 1200px;
   }
+
   .slideWrap {
     display: flex;
     justify-content: space-between;
     width: 400%;
     overflow: visible;
     list-style: none;
+
     .slideItem {
       width: 250px;
       height: 300px;
@@ -17,11 +20,13 @@
       &:last-child {
         margin-right: 0;
       }
+
       img {
         width: 100%;
       }
     }
   }
+
   .paginationWrap {
     display: flex;
     position: absolute;
@@ -38,13 +43,16 @@
       transition: all 0.5s;
       border-bottom: 1px solid black;
       cursor: pointer;
+
       &:last-child {
         margin-right: 0;
       }
+
       &.active {
         position: relative;
         border-width: 6px;
       }
+
       &:hover {
         border-width: 6px;
       }
@@ -64,9 +72,11 @@
     background: #fff;
     font-size: 20px;
     cursor: pointer;
+
     &.prevBtn {
       left: -50px;
     }
+
     &.nextBtn {
       right: -50px;
     }

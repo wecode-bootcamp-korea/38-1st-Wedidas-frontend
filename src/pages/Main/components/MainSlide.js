@@ -8,6 +8,7 @@ const MainSlide = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sources, setSources] = useState([]);
   const slideRef = useRef(null);
+
   useEffect(() => {
     fetch('data/MainSlide.json', {
       method: 'GET',
@@ -20,7 +21,6 @@ const MainSlide = () => {
 
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
-      // setCurrentSlide(0);
       return;
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -28,7 +28,6 @@ const MainSlide = () => {
   };
   const prevSlide = () => {
     if (currentSlide === 0) {
-      // setCurrentSlide(TOTAL_SLIDES);
       return;
     } else {
       setCurrentSlide(currentSlide - 1);
@@ -56,14 +55,14 @@ const MainSlide = () => {
       </div>
       <button
         onClick={prevSlide}
-        style={currentSlide === 0 ? { opacity: 0 } : { opacity: 1 }}
+        style={{ opacity: currentSlide === 0 ? 0 : 1 }}
         className="prevBtn slideBtn"
       >
         <BsArrowLeft />
       </button>
       <button
         onClick={nextSlide}
-        style={currentSlide >= TOTAL_SLIDES ? { opacity: 0 } : { opacity: 1 }}
+        style={{ opacity: currentSlide >= TOTAL_SLIDES ? 0 : 1 }}
         className="nextBtn slideBtn"
       >
         <BsArrowRight />
@@ -73,9 +72,7 @@ const MainSlide = () => {
           <div
             key={index}
             onClick={() => moveDot(index)}
-            className={
-              currentSlide === index ? 'pagination active' : 'pagination'
-            }
+            className={`pagination ${currentSlide === index ? 'active' : ''}`}
           />
         ))}
       </div>

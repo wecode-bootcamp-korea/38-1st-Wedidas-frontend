@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import { TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
 import { GiSpeakerOff, GiSpeaker } from 'react-icons/gi';
-import './MainKv.scss';
+import './MainBanner.scss';
 
-const MainKv = () => {
-  const [isPlay, setIsPlay] = useState(true);
-  const [soundToggle, setSoundToggle] = useState(true);
+const MainBanner = () => {
+  const [isPlayToggle, setIsPlayToggle] = useState(true);
+  const [isSoundToggle, setIsSoundToggle] = useState(true);
   const [delay] = useState(3000);
   const [currentImage, setCurrentImage] = useState('');
 
-  // setInterval을 바로 쓰면서 button클릭시 일시 정지가 안될지 알아본후 지울 예정
+  // FIXME: setInterval을 바로 쓰면서 button클릭시 일시 정지가 안될지 알아본후 지울 예정
   // useEffect(() => {
   //   const timer = setInterval(() => {
-  //     if (currentImage === 'first') {
+  //     if (currentImage === 'show') {
   //       setCurrentImage('');
   //     } else if (currentImage === '') {
-  //       setCurrentImage('first');
+  //       setCurrentImage('show');
   //     }
   //   }, 3000);
   //   return () => {
@@ -49,11 +49,11 @@ const MainKv = () => {
         setCurrentImage('show');
       }
     },
-    isPlay ? delay : null
+    isPlayToggle ? delay : null
   );
 
   return (
-    <div className="mainKv">
+    <div className="mainBanner">
       <div className="imgBox">
         <img
           className={currentImage}
@@ -74,15 +74,15 @@ const MainKv = () => {
         <button className="btn">구매하기</button>
       </div>
       <div className="btnBox">
-        <button onClick={() => setIsPlay(!isPlay)}>
-          {isPlay ? <TbPlayerPause /> : <TbPlayerPlay />}
+        <button onClick={() => setIsPlayToggle(!isPlayToggle)}>
+          {isPlayToggle ? <TbPlayerPause /> : <TbPlayerPlay />}
         </button>
-        <button onClick={() => setSoundToggle(!soundToggle)}>
-          {soundToggle ? <GiSpeaker /> : <GiSpeakerOff />}
+        <button onClick={() => setIsSoundToggle(!isSoundToggle)}>
+          {isSoundToggle ? <GiSpeaker /> : <GiSpeakerOff />}
         </button>
       </div>
     </div>
   );
 };
 
-export default MainKv;
+export default MainBanner;
