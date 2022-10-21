@@ -74,8 +74,9 @@ const SignUpForm = () => {
         />
         <input
           className="input"
-          placeholder="전화번호를 입력하세요"
-          type="tel"
+          placeholder="전화번호를 입력하세요 예시)010-1234-5678"
+          type="pattern"
+          pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
           onChange={handleInput}
           name="phone_number"
           required
