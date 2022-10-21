@@ -1,0 +1,27 @@
+.wishList {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 40px;
+
+  .title {
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .productCount {
+    margin-bottom: 10px;
+  }
+
+  .signupBanner {
+    width: 100%;
+    padding: 30px 50px;
+    background-color: #6d8094;
+    color: #fff;
+
+    .signupTitle {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+  }
+}
