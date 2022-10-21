@@ -1,4 +1,5 @@
 .itemProduct {
+  position: relative;
   width: 250px;
 
   .itemProductImgBox {
@@ -21,10 +22,9 @@
       position: absolute;
       bottom: 0px;
       left: 10px;
-      width: 63px;
-      height: 20px;
-      padding: 3px;
-      background-color: rgb(255, 255, 255);
+      padding: 5px;
+      transition: all 0.3s ease-in-out;
+      background-color: #fff;
     }
   }
 
@@ -41,11 +41,10 @@
       font-size: 14px;
     }
   }
-}
-
-.itemProduct:hover {
-  border: 1px black solid;
-  .itemPrice {
-    bottom: 10px;
+  &:hover {
+    border: 1px black solid;
+    .itemPrice {
+      bottom: 10px;
+    }
   }
 }

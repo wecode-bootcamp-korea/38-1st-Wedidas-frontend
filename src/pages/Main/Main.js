@@ -1,6 +1,13 @@
-import React from 'react';
+import MainSlide from './components/MainSlide';
+import MainBanner from './components/MainBanner';
 import './Main.scss';
+
 const Main = () => {
-  return <h1>메인페이지입니다.</h1>;
+  return (
+    <div className="main">
+      <MainBanner />
+      <MainSlide />
+    </div>
+  );
 };
 export default Main;
