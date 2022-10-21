@@ -6,17 +6,23 @@ import FilterAndSort from './FilterAndSort/FilterAndSort';
 import './Itemlist.scss';
 
 const Itemlist = () => {
-  const [shoesData, setShoesData] = useState([]);
+  const [shoesData, setShoesData] = useState(null);
   const [isFilter, setIsFilter] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const offset = searchParams.get('offset');
   const limit = searchParams.get('limit');
 
   useEffect(() => {
-    fetch(`/data/itemlist.json`)
+    fetch(
+      `http://10.58.52.165:3000/products?gender=men&offset=${offset}&limit=${limit}`,
+      {
+        method: 'GET',
+        headers: { 'content-type': 'application/json' },
+      }
+    )
       .then(res => res.json())
-      .then(res => setShoesData(res));
-  }, []);
+      .then(res => setShoesData(res.data));
+  }, [offset, limit]);
 
   const handleWindow = e => {
     const clicked = e.target.closest('.filterAndSort');
@@ -30,8 +36,8 @@ const Itemlist = () => {
   };
 
   const onClick = pagingNum => {
-    searchParams.set('offset', (pagingNum - 1) * 8);
-    searchParams.set('limit', 8);
+    searchParams.set('offset', (pagingNum - 1) * 10);
+    searchParams.set('limit', 10);
     setSearchParams(searchParams);
   };
 
@@ -39,7 +45,7 @@ const Itemlist = () => {
     <div className="itemList" onClick={handleWindow}>
       <ItemListTop clickFilter={clickFilter} />
       <div className="itemListProducts">
-        {shoesData.map(item => (
+        {shoesData?.map(item => (
           <ItemProduct key={item.id} data={item} />
         ))}
       </div>
