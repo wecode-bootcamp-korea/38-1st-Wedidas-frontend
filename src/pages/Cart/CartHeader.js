@@ -1,5 +1,6 @@
 import React from 'react';
 import './CartHeader.scss';
+
 const CartHeader = ({ length, totalPrice }) => {
   return (
     <div className="cartHeader">

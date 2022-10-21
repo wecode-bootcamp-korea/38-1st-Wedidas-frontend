@@ -1,7 +1,7 @@
 @import '../../styles/variable';
 
 .cartItem {
-  @include flex(null, null, null);
+  display: flex;
   position: relative;
   width: 720px;
   height: 240px;
@@ -50,8 +50,7 @@
 
     .listItem {
       height: 56px;
-      padding-top: 20px;
-      padding-left: 20px;
+      padding: 20px 0 0 20px;
     }
   }
 }

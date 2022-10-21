@@ -35,10 +35,8 @@ const CartItem = ({ data }) => {
       <div className="cartItemContent">
         <div>
           <div className="cartItemXbox">
-            <div>
-              <span className="cartItemName">{data.name}</span>
-              <span className="cartItemPrice">{data.price}원</span>
-            </div>
+            <span className="cartItemName">{data.name}</span>
+            <span className="cartItemPrice">{data.price}원</span>
             <AiOutlineClose />
           </div>
           <div className="cartItemHeartBox">

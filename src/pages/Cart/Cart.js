@@ -1,22 +1,25 @@
 import React from 'react';
 import CartHeader from './CartHeader';
 import CartItem from './CartItem';
-import './Cart.scss';
 import CartAside from './CartAside';
+import './Cart.scss';
 
 const Cart = () => {
-  let totalPrice = 0;
-  DATA.map(el => (totalPrice = totalPrice + parseInt(el.price)));
+  let inititalPrice = 0;
+  const sumTotalPrice = DATA.reduce(
+    (prev, current) => prev + current.price,
+    inititalPrice
+  );
 
   return (
     <div className="cart">
       <div className="cartLeft">
-        <CartHeader length={DATA.length} totalPrice={totalPrice} />
+        <CartHeader length={DATA.length} totalPrice={sumTotalPrice} />
         {DATA.map(data => (
           <CartItem key={data.id} data={data} />
         ))}
       </div>
-      <CartAside totalPrice={totalPrice} />
+      <CartAside totalPrice={sumTotalPrice} />
     </div>
   );
 };
