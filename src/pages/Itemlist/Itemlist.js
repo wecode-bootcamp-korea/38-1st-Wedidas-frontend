@@ -39,7 +39,7 @@ const Itemlist = () => {
     <div className="itemList" onClick={handleWindow}>
       <ItemListTop clickFilter={clickFilter} />
       <div className="itemListProducts">
-        {shoesData?.map(item => (
+        {shoesData.map(item => (
           <ItemProduct key={item.id} data={item} />
         ))}
       </div>

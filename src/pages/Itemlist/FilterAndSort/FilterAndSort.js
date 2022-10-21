@@ -4,7 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import './FilterAndSort.scss';
 
 const FilterAndSort = ({ setIsFilter }) => {
-  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isSelected, setIsSelected] = useState({
     latest: false,
     lowprice: false,
@@ -33,12 +33,23 @@ const FilterAndSort = ({ setIsFilter }) => {
     });
   };
 
+  const onClick = () => {
+    searchParams.set('sort', 'latest');
+    setSearchParams(searchParams);
+  };
+
   return (
     <div className="filterAndSort">
       <div className="filterAndSortHeader">
         <span>Filter & Sort</span>
         <div className="filterAndSortBtnBox">
-          <button className="filterAndSortReset" onClick={clickReset}>
+          <button
+            className="filterAndSortReset"
+            onClick={() => {
+              clickReset();
+              setSearchParams({});
+            }}
+          >
             모두지우기
           </button>
           <AiOutlineClose onClick={clickClose} className="filterAndSortClose" />
@@ -84,7 +95,7 @@ const FilterAndSort = ({ setIsFilter }) => {
           사이즈
         </button>
         <input type="checkbox" />
-        {/* <button onClick={onClick}>클릭하세요</button> */}
+        <button onClick={onClick}>클릭하세요</button>
       </ul>
     </div>
   );
