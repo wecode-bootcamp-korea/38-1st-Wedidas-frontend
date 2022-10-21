@@ -4,7 +4,7 @@ import { CiHeart } from 'react-icons/ci';
 import { SlArrowDown } from 'react-icons/sl';
 import './CartItem.scss';
 
-const CartItem = ({ data }) => {
+const CartItem = ({ data, priceToString }) => {
   const [isSelect, setIsSelect] = useState(false);
   const [numberOfShoe, setNumberOfShoe] = useState('1');
 
@@ -36,7 +36,7 @@ const CartItem = ({ data }) => {
         <div>
           <div className="cartItemXbox">
             <span className="cartItemName">{data.name}</span>
-            <span className="cartItemPrice">{data.price}원</span>
+            <span className="cartItemPrice">{priceToString(data.price)}원</span>
             <AiOutlineClose />
           </div>
           <div className="cartItemHeartBox">

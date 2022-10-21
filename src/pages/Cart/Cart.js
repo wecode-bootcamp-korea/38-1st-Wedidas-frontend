@@ -11,15 +11,22 @@ const Cart = () => {
     inititalPrice
   );
 
+  const priceToString = price => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
   return (
     <div className="cart">
       <div className="cartLeft">
-        <CartHeader length={DATA.length} totalPrice={sumTotalPrice} />
+        <CartHeader
+          length={DATA.length}
+          totalPrice={priceToString(sumTotalPrice)}
+        />
         {DATA.map(data => (
-          <CartItem key={data.id} data={data} />
+          <CartItem key={data.id} data={data} priceToString={priceToString} />
         ))}
       </div>
-      <CartAside totalPrice={sumTotalPrice} />
+      <CartAside totalPrice={priceToString(sumTotalPrice)} />
     </div>
   );
 };
