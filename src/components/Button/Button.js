@@ -1,12 +1,10 @@
 import React from 'react';
-import { BsArrowRight } from 'react-icons/bs';
 import './Button.scss';
 
-const Button = props => {
+const Button = ({ children, onClick }) => {
   return (
-    <button className="btn">
-      {props.btnTitle}
-      <BsArrowRight className="arrow" />
+    <button className="btn" onClick={onClick}>
+      {children}
     </button>
   );
 };
