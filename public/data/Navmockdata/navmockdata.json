@@ -1,0 +1,159 @@
+[
+  {
+    "id": 1,
+    "gender": "남성",
+    "shoes": {
+      "name": "신발",
+      "url": "/shoes"
+    },
+    "shoesCategory": ["오리지널스", "러닝", "슬리퍼"],
+    "shoesLink": ["/originals", "/running", "/slippers"],
+    "classname": "mshoes"
+  },
+  {
+    "id": 2,
+    "gender": "남성",
+    "shoes": {
+      "name": "의류",
+      "url": "/cloths"
+    },
+    "shoesCategory": ["자켓", "축구 저지", "후디/스웨트셔츠"],
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "mattires"
+  },
+  {
+    "id": 3,
+    "gender": "남성",
+    "shoes": {
+      "name": "용품",
+      "url": "/accessories"
+    },
+    "shoesCategory": ["양말", "모자", "가방"],
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "maccessories"
+  },
+  {
+    "id": 4,
+    "gender": "남성",
+    "shoes": {
+      "name": "스포츠",
+      "url": "/sports"
+    },
+    "shoesCategory": ["러닝", "아웃도어", "트레이닝"],
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "msports"
+  },
+
+  {
+    "id": 5,
+    "gender": "여성",
+    "shoes": {
+      "name": "신발",
+      "url": "/womenShoes"
+    },
+    "shoesCategory": ["오리지널스", "러닝", "슬리퍼"],
+    "shoesLink": ["./originals", "./running", "./slippers"],
+    "classname": "mshoes"
+  },
+  {
+    "id": 6,
+    "gender": "여성",
+    "shoes": {
+      "name": "의류",
+      "url": "/cloths"
+    },
+    "shoesCategory": ["자켓", "축구 저지", "후디/스웨트셔츠"],
+    "shoesLink": ["./originals", "./running", "./slippers"]
+  },
+  {
+    "id": 7,
+    "gender": "여성",
+    "shoes": {
+      "name": "용품",
+      "url": "/accessories"
+    },
+    "shoesCategory": ["양말", "모자", "가방"],
+    "shoesLink": ["./originals", "./running", "./slippers"]
+  },
+  {
+    "id": 8,
+    "gender": "여성",
+    "shoes": {
+      "name": "스포츠",
+      "url": "/sports"
+    },
+    "shoesCategory": ["러닝", "아웃도어", "트레이닝"],
+    "shoesLink": ["./originals", "./running", "./slippers"]
+  },
+  {
+    "id": 9,
+    "shoes": {
+      "name": "남성 전체보기",
+      "url": "/allMens"
+    }
+  },
+  {
+    "id": 10,
+    "shoes": {
+      "name": "남성신발 전체보기",
+      "url": "/allMensShoes"
+    }
+  },
+  {
+    "id": 11,
+    "shoes": {
+      "name": "남성의류 전체보기",
+      "url": "/allMensAttires"
+    }
+  },
+  {
+    "id": 12,
+    "shoes": {
+      "name": "남성용품 전체보기",
+      "url": "/allMensProps"
+    }
+  },
+  {
+    "id": 13,
+    "shoes": {
+      "name": "스포츠 전체보기",
+      "url": "/allSports"
+    }
+  },
+
+  {
+    "id": 14,
+    "shoes": {
+      "name": "여성 전체보기",
+      "url": "/allWMens"
+    }
+  },
+  {
+    "id": 15,
+    "shoes": {
+      "name": "여성신발 전체보기",
+      "url": "/allWMensShoes"
+    }
+  },
+  {
+    "id": 16,
+    "shoes": {
+      "name": "여성의류 전체보기",
+      "url": "/allWMensAttires"
+    }
+  },
+  {
+    "id": 17,
+    "shoes": {
+      "name": "여성용품 전체보기",
+      "url": "/allWMensProps"
+    }
+  },
+  {
+    "id": 18,
+    "shoes": {
+      "name": "스포츠 전체보기",
+      "url": "/WallSports"
+    }
+  }
+]
