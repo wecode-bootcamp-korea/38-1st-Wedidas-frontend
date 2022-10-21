@@ -8,16 +8,16 @@ const Wishlist = () => {
   const [wishItemList, setWishItemList] = useState([]);
   const itemZero =
     '아직 관심 목록에 저장한 항목이 없습니다. 쇼핑을 시작하고 관심 목록에 좋아하는 제품을 추가하세요.';
-  useEffect(() => {
-    fetch('/data/itemlist.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setWishItemList(data);
-        setCount(wishItemList.length);
-      });
-  }, [wishItemList]);
+  // useEffect(() => {
+  //   fetch('/data/itemlist.json', {
+  //     method: 'GET',
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       setWishItemList(data);
+  //       setCount(wishItemList.length);
+  //     });
+  // }, [wishItemList]);
 
   return (
     <div className="wishList">
