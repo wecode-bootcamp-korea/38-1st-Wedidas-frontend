@@ -5,8 +5,6 @@ import { BiUser, BiHeart } from 'react-icons/bi';
 import { RiShoppingBagLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './Nav.scss';
-import '../../styles/reset.scss';
-import '../../styles/common.scss';
 
 const Nav = () => {
   const [search, setSearch] = useState('');
@@ -123,9 +121,11 @@ const Nav = () => {
                 .filter(mockDataFetch => mockDataFetch.gender === '남성')
                 .map(data => (
                   <div key={data.id} className="mock">
-                    <Link to={data.shoes.url}>{data.shoes.name}</Link>
+                    <Link className="mainCategory" to={data.shoes.url}>
+                      {data.shoes.name}
+                    </Link>
                     {data.shoesCategory.map(el => (
-                      <Link className={data.id}>{el}</Link>
+                      <Link>{el}</Link>
                     ))}
                   </div>
                 ))}
@@ -157,9 +157,11 @@ const Nav = () => {
                 .filter(mockDataFetch => mockDataFetch.gender === '여성')
                 .map(data => (
                   <div key={data.id} className="mock">
-                    <Link to={data.shoes.url}>{data.shoes.name}</Link>
+                    <Link to={data.shoes.url} className="mainCategory">
+                      {data.shoes.name}
+                    </Link>
                     {data.shoesCategory.map(el => (
-                      <Link className={data.id}>{el}</Link>
+                      <Link>{el}</Link>
                     ))}
                   </div>
                 ))}
