@@ -98,7 +98,7 @@ const Nav = () => {
                 </form>
               </div>
               <div className="iconWrapper">
-                <Link to="/signup">
+                <Link to="/login">
                   <BiUser className="iconUser" />
                 </Link>
                 <Link to="/wishlist">
