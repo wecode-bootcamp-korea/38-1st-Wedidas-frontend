@@ -59,7 +59,9 @@ const Nav = () => {
             <button className="leftMenuBar">
               <GiHamburgerMenu />
             </button>
-            <div className="logo">Wedidas</div>
+            <div className="logo">
+              <Link to="/">Wedidas</Link>
+            </div>
             <div className="mainMenu">
               <ul className="mainMenuListing">
                 <li
