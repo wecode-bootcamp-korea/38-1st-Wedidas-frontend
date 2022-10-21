@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { BsArrow90DegLeft } from 'react-icons/bs';
 import { BiRuler } from 'react-icons/bi';
 import { TbTruckDelivery } from 'react-icons/tb';
@@ -14,8 +14,8 @@ import '../../styles/common.scss';
 
 const Itemdetail = () => {
   let navigate = useNavigate();
-
   let [shoeFetch, setShoeFetch] = useState([]);
+  let [readmore, setReadmore] = useState(false);
 
   useEffect(() => {
     fetch('/data/itemlist.json', {
@@ -27,14 +27,30 @@ const Itemdetail = () => {
       });
   }, []);
 
+  const toggleMenu = () => {
+    setReadmore(readmore => !readmore);
+  };
+
   return shoeFetch.map(item => (
     <div key={item.id} className="detailpage">
       <div className="detailpageDetailSection">
         <div className="imageList">
-          <img src={item.thumbnail} />
-          <button className="showMoreButton">
-            <span>SHOW MORE</span>
-            <IoIosArrowDown className="downArrowIcon" />
+          <img className="productThumbnail" src={item.thumbnail} />
+          {readmore ? (
+            <img className="additionalThumbnail" src={item.thumbnail} />
+          ) : (
+            <div className="hidedisplay" />
+          )}
+          <button
+            className={!readmore ? 'showMoreButton' : 'hideMoreButton'}
+            onClick={() => toggleMenu()}
+          >
+            <span>{!readmore ? 'SHOW MORE' : 'SHOW LESS'}</span>
+            {!readmore ? (
+              <IoIosArrowDown className="downArrowIcon" />
+            ) : (
+              <IoIosArrowUp className="downArrowIcon" />
+            )}
           </button>
         </div>
         <div className="buttonList">

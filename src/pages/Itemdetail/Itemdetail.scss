@@ -10,6 +10,21 @@
   align-items: center;
   flex-direction: column;
 
+  .productThumbnail {
+    max-width: 100%;
+    height: auto;
+    display: block;
+
+    .additionalThumbnail {
+      max-width: 50%;
+      height: auto;
+    }
+
+    .hidedisplay {
+      display: none;
+    }
+  }
+
   .showMoreButton {
     display: flex;
     justify-content: space-between;
@@ -20,6 +35,35 @@
     font-weight: bolder;
     border: 1px solid black;
     background-color: white;
+    position: relative;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    span {
+      padding-left: 20px;
+    }
+
+    .downArrowIcon {
+      font-size: 20px;
+      font-weight: bolder;
+    }
+  }
+
+  .hideMoreButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 170px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: bolder;
+    border: 1px solid black;
+    background-color: white;
+    position: relative;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
 
     span {
       padding-left: 20px;
