@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosArrowDown } from 'react-icons/io';
 import { BsArrow90DegLeft } from 'react-icons/bs';
@@ -15,10 +15,23 @@ import '../../styles/common.scss';
 const Itemdetail = () => {
   let navigate = useNavigate();
 
-  return (
-    <div className="detailpage">
+  let [shoeFetch, setShoeFetch] = useState([]);
+
+  useEffect(() => {
+    fetch('/data/itemlist.json', {
+      method: 'GET',
+    })
+      .then(res => res.json())
+      .then(data => {
+        setShoeFetch(data);
+      });
+  }, []);
+
+  return shoeFetch.map(item => (
+    <div key={item.id} className="detailpage">
       <div className="detailpageDetailSection">
         <div className="imageList">
+          <img src={item.thumbnail} />
           <button className="showMoreButton">
             <span>SHOW MORE</span>
             <IoIosArrowDown className="downArrowIcon" />
@@ -81,8 +94,8 @@ const Itemdetail = () => {
             <p>review (임시)</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">니짜트레포일임시</p>
-            <p className="price"> 59,000원</p>
+            <p className="productName">{item.name}</p>
+            <p className="price"> {item.price}</p>
             <p className="availableColors"> 컬러</p>
           </div>
         </div>
@@ -142,7 +155,7 @@ const Itemdetail = () => {
         </div>
       </div>
     </div>
-  );
+  ));
 };
 
 export default Itemdetail;
