@@ -4,20 +4,20 @@
     "gender": "남성",
     "shoes": {
       "name": "신발",
-      "url": "/itemlist?gender=men&offest=0&limit=8"
+      "url": "/itemlist/men?offest=0&limit=8"
     },
     "shoesCategory": [
       {
         "name": "오리지널스",
-        "url": "/itemlist?gender=men&category=originals"
+        "url": "/itemlist/men?category=originals"
       },
       {
         "name": "슬리퍼",
-        "url": "/itemlist?gender=men&category=slipper"
+        "url": "/itemlist/men?category=slipper"
       },
       {
         "name": "사커",
-        "url": "/itemlist?gender=men&category=soccer"
+        "url": "/itemlist/men?category=soccer"
       }
     ],
     "classname": "mshoes"
@@ -97,20 +97,20 @@
     "gender": "여성",
     "shoes": {
       "name": "신발",
-      "url": "/itemlist?gender=women&offest=0&limit=8"
+      "url": "/itemlist/women?offest=0&limit=8"
     },
     "shoesCategory": [
       {
         "name": "오리지널스",
-        "url": "/itemlist?gender=women&category=originals"
+        "url": "/itemlist/women?category=originals"
       },
       {
         "name": "슬리퍼",
-        "url": "/itemlist?gender=women&category=slipper"
+        "url": "/itemlist/women?category=slipper"
       },
       {
         "name": "사커",
-        "url": "/itemlist?gender=women&category=soccer"
+        "url": "/itemlist/women?category=soccer"
       }
     ],
     "classname": "mshoes"
@@ -185,14 +185,14 @@
     "id": 9,
     "shoes": {
       "name": "남성 전체보기",
-      "url": "/itemlist?gender=men&offest=0&limit=8"
+      "url": "/itemlist/men?offest=0&limit=8"
     }
   },
   {
     "id": 10,
     "shoes": {
       "name": "남성신발 전체보기",
-      "url": "/itemlist?gender=men&offest=0&limit=8"
+      "url": "/itemlist/men?offest=0&limit=8"
     }
   },
   {
@@ -221,14 +221,14 @@
     "id": 14,
     "shoes": {
       "name": "여성 전체보기",
-      "url": "/itemlist?gender=men&offest=0&limit=8"
+      "url": "/itemlist/women?offest=0&limit=8"
     }
   },
   {
     "id": 15,
     "shoes": {
       "name": "여성신발 전체보기",
-      "url": "/itemlist?gender=men&offest=0&limit=8"
+      "url": "/itemlist/women?offest=0&limit=8"
     }
   },
   {
