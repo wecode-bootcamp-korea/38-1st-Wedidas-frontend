@@ -8,6 +8,9 @@ const ItemProduct = ({ data }) => {
   const handleWishClick = () => {
     setIsWish(!isWish);
   };
+  const priceToString = price => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   return (
     <div className="itemProduct">
@@ -23,7 +26,7 @@ const ItemProduct = ({ data }) => {
             src={data.thumbnailUrl}
             alt="신발사진"
           />
-          <p className="itemPrice">{data.price}</p>
+          <p className="itemPrice">{priceToString(data.price)}</p>
         </div>
         <div className="itemTextBox">
           <p className="itemName">{data.name}</p>
