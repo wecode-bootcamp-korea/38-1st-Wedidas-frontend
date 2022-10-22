@@ -11,7 +11,19 @@ const ItemProduct = ({ data }) => {
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
-
+  const clickHeart = () => {
+    fetch('api주소', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        accsessToken: localStorage.getItem('token'),
+      }
+      body : JSON.stringify({
+        productId : data.productId
+      }
+      ),
+    });
+  };
   return (
     <div className="itemProduct">
       <Link>
@@ -19,7 +31,13 @@ const ItemProduct = ({ data }) => {
           {!isWish ? (
             <HiOutlineHeart className="heartIcon" onClick={handleWishClick} />
           ) : (
-            <HiHeart className="heartIcon" onClick={handleWishClick} />
+            <HiHeart
+              className="heartIcon"
+              onClick={() => {
+                handleWishClick();
+                clickHeart();
+              }}
+            />
           )}
           <img
             className="itemProductImg"

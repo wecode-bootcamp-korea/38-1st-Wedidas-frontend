@@ -33,6 +33,7 @@
     padding: 10px;
 
     .itemName {
+      margin-bottom: 5px;
       font-size: 14px;
     }
 
@@ -41,8 +42,10 @@
       font-size: 14px;
     }
   }
+
   &:hover {
     border: 1px black solid;
+
     .itemPrice {
       bottom: 10px;
     }

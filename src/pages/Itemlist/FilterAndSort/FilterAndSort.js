@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import './FilterAndSort.scss';
 
-const FilterAndSort = ({ setIsFilter }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const FilterAndSort = ({ setIsFilter, clickSortLatest, clickSortPrice }) => {
   const [isSelected, setIsSelected] = useState({
     latest: false,
-    lowprice: false,
-    highprice: false,
+    price: null,
     size: false,
   });
 
@@ -27,17 +24,10 @@ const FilterAndSort = ({ setIsFilter }) => {
   const clickReset = () => {
     setIsSelected({
       latest: false,
-      lowprice: false,
-      highprice: false,
+      price: false,
       size: false,
     });
   };
-
-  const onClick = () => {
-    searchParams.set('sort', 'latest');
-    setSearchParams(searchParams);
-  };
-
   return (
     <div className="filterAndSort">
       <div className="filterAndSortHeader">
@@ -47,7 +37,6 @@ const FilterAndSort = ({ setIsFilter }) => {
             className="filterAndSortReset"
             onClick={() => {
               clickReset();
-              setSearchParams({});
             }}
           >
             모두지우기
@@ -60,32 +49,47 @@ const FilterAndSort = ({ setIsFilter }) => {
           className={`filterAndSortList ${
             isSelected.latest ? 'selected' : 'bordernone'
           }`}
-          onClick={handleSelected}
+          onClick={e => {
+            handleSelected(e);
+            clickSortLatest(isSelected.latest);
+          }}
           name="latest"
         >
           최근 순
         </button>
-        <button
-          className={`filterAndSortList ${
-            isSelected.lowprice ? 'selected' : 'bordernone'
-          }`}
-          onClick={handleSelected}
-          name="lowprice"
+        <form
+          onClick={e => {
+            e.preventDefault();
+          }}
         >
-          가격 낮은 순
-        </button>
+          <button
+            className={`filterAndSortList ${
+              isSelected.price ? 'selected' : 'bordernone'
+            }`}
+            onClick={e => {
+              handleSelected(e);
+              clickSortPrice(isSelected.price);
+            }}
+            name="price"
+          >
+            가격 낮은 순
+          </button>
+          <button
+            type="radio"
+            className={`filterAndSortList ${
+              isSelected.price ? 'bordernone' : 'selected'
+            }`}
+            onClick={e => {
+              handleSelected(e);
+              clickSortPrice(isSelected.price);
+            }}
+            name="price"
+          >
+            가격 높은 순
+          </button>
+        </form>
         <button
-          href="#"
-          className={`filterAndSortList ${
-            isSelected.highprice ? 'selected' : 'bordernone'
-          }`}
-          onClick={handleSelected}
-          name="highprice"
-        >
-          가격 높은 순
-        </button>
-        <button
-          href="#"
+          type="radio"
           className={`filterAndSortList ${
             isSelected.size ? 'selected' : 'bordernone'
           }`}
@@ -94,8 +98,6 @@ const FilterAndSort = ({ setIsFilter }) => {
         >
           사이즈
         </button>
-        <input type="checkbox" />
-        <button onClick={onClick}>클릭하세요</button>
       </ul>
     </div>
   );
