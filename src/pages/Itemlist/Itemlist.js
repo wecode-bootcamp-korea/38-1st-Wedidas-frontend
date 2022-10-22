@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import ItemListTop from './ItemListTop';
 import ItemProduct from '../../components/ItemProduct/ItemProduct';
 import FilterAndSort from './FilterAndSort/FilterAndSort';
@@ -9,12 +9,13 @@ const Itemlist = () => {
   const [shoesData, setShoesData] = useState(null);
   const [isFilter, setIsFilter] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const readGender = useParams();
   const offset = searchParams.get('offset');
   const limit = searchParams.get('limit');
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.165:3000/products?gender=men&offset=${offset}&limit=${limit}`,
+      `http://10.58.52.165:3000/products/${readGender}&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
