@@ -23,5 +23,23 @@
       margin-bottom: 10px;
       font-weight: 700;
     }
+
+    .description {
+      margin-bottom: 20px;
+    }
+
+    .signin {
+      margin: 20px 0 5px;
+    }
+  }
+
+  .wishListItem {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    .wishProduct {
+      width: 180px;
+      margin-bottom: 10px;
+    }
   }
 }

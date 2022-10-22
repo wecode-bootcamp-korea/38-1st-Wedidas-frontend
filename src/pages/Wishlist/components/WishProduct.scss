@@ -1,6 +1,5 @@
-.itemProduct {
+.wishProduct {
   position: relative;
-  width: 250px;
 
   .itemProductImgBox {
     position: relative;
@@ -29,7 +28,6 @@
   }
 
   .itemTextBox {
-    height: 90px;
     padding: 10px;
 
     .itemName {
@@ -42,10 +40,8 @@
       font-size: 14px;
     }
   }
-
   &:hover {
     border: 1px black solid;
-
     .itemPrice {
       bottom: 10px;
     }

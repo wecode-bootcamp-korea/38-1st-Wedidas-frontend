@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CiHeart } from 'react-icons/ci';
+import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
 import './ItemProduct.scss';
 
 const ItemProduct = ({ data }) => {
+  const [isWish, setIsWish] = useState(false);
+  const handleWishClick = () => {
+    setIsWish(!isWish);
+  };
+
   return (
     <div className="itemProduct">
       <Link>
         <div className="itemProductImgBox">
-          <CiHeart className="heartIcon" />
-          <img className="itemProductImg" src={data.thumbnail} alt="신발사진" />
+          {!isWish ? (
+            <HiOutlineHeart className="heartIcon" onClick={handleWishClick} />
+          ) : (
+            <HiHeart className="heartIcon" onClick={handleWishClick} />
+          )}
+          <img
+            className="itemProductImg"
+            src={data.thumbnailUrl}
+            alt="신발사진"
+          />
           <p className="itemPrice">{data.price}</p>
         </div>
         <div className="itemTextBox">
