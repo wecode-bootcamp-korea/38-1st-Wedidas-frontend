@@ -1,26 +1,35 @@
 .detailpage {
   display: flex;
+  height: 100%;
+  border-bottom: 1px solid #d3d7da;
 }
 
 .detailpageDetailSection {
   background-color: white;
-  width: 70%;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
-  .productThumbnail {
-    max-width: 100%;
+  .imagelist {
+    display: flex;
+    justify-content: center;
+    width: 100%;
     height: auto;
-    display: block;
+  }
+
+  .productThumbnail {
+    width: 100%;
+    height: auto;
+    display: flex;
 
     .additionalThumbnail {
-      max-width: 50%;
+      width: 100%;
       height: auto;
     }
 
-    .hidedisplay {
+    .hiddenDisplay {
       display: none;
     }
   }
@@ -65,7 +74,7 @@
     left: 50%;
     transform: translateX(-50%);
 
-    span {
+    .categoryInnerLink {
       padding-left: 20px;
     }
 
@@ -99,25 +108,41 @@
     .highlightButton {
       border-top: 1px solid #d3d7da;
     }
+
+    .reviewbutton {
+      margin-bottom: 20px;
+    }
   }
 }
 
 .categoryLink {
   display: flex;
+  align-items: center;
   margin-left: 10px;
   position: absolute;
-  top: 50px;
+  top: 120px;
 
-  .backShift {
+  .linkWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .arrowSpace {
+      margin-right: 10px;
+    }
+  }
+
+  .linkWrapper :hover {
+    background-color: black;
+    color: white;
+  }
+
+  .goback {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     font-size: 16px;
-  }
-
-  .backShift :hover {
-    background-color: black;
-    color: white;
   }
 
   span {
@@ -133,12 +158,10 @@
 }
 .detailpageSelectSection {
   border-left: 1px solid #d3d7da;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: sticky;
+  top: 110px;
   padding: 30px 40px;
-  width: 30%;
+  width: 450px;
   height: 100vh;
 
   .topMostUpperElement {
@@ -150,12 +173,8 @@
       display: flex;
       justify-content: space-between;
       height: 30px;
-
-      .p {
-        font-size: 16px;
-        height: 22px;
-      }
     }
+
     .titlePriceColor {
       .productName {
         font-size: 40px;
@@ -183,7 +202,7 @@
     }
 
     .availableSize {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     .sizeButton {
@@ -199,15 +218,17 @@
 
       .rulerIcon {
         font-size: 16px;
-        margin: 10px 5px 0 0;
+        margin: px 5px 0 0;
         text-decoration: underline;
       }
     }
+
     .sizeGuide :hover {
       background-color: black;
       color: white;
     }
   }
+
   .rightLowerButtonList {
     width: 100%;
 
@@ -243,7 +264,7 @@
       border: 1px solid black;
       outline: none;
       height: 50px;
-      width: 380px;
+      width: 370px;
       background-color: white;
       font-size: 16px;
     }
@@ -253,7 +274,7 @@
       flex-direction: column;
       margin-top: 10px;
 
-      .p1 {
+      .listUpperMargin {
         margin-top: 10px;
       }
     }

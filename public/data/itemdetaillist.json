@@ -1,0 +1,21 @@
+[
+  {
+    "id": 0,
+    "name": "에어포스",
+    "price": 119000,
+    "mainimage": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/b768c27751ec43ab8815ae71001fbb7c_9366/Black_GV6777_01_standard.jpg",
+    "thumbnail": [
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+      "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/50670d31229443488944ae7100204e11_9366/Black_GV6777_02_standard_hover.jpg"
+    ],
+    "description": "착용감 좋은 신발~!",
+    "categoryname": "남성 Originals",
+    "sizes": [
+      { "220": 3 },
+      { "230": 3 },
+      { "240": 0 },
+      { "250": 3 },
+      { "260": 0 }
+    ]
+  }
+]
