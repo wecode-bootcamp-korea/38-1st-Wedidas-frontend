@@ -41,20 +41,20 @@ const Itemlist = () => {
   };
 
   const pagination = pagingNum => {
-    searchParams.set('offset', (pagingNum - 1) * 10);
-    searchParams.set('limit', 10);
+    searchParams.set('offset', (pagingNum - 1) * 8);
+    searchParams.set('limit', 8);
     setSearchParams(searchParams);
   };
 
   const clickSortLatest = isTrue => {
     if (!isTrue) {
-      searchParams.set('sort', 'latest');
+      searchParams.set('sort', 'new');
       setSearchParams(searchParams);
     } else {
       setSearchParams({ offset: 0, limit: 8 });
     }
     fetch(
-      `http://10.58.52.165:3000/products/${gender.gender}?offset=0&limit=8&sort=${sort}`,
+      `http://10.58.52.165:3000/products/${gender.gender}?&sort=${sort}offset=0&limit=8`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
@@ -64,7 +64,7 @@ const Itemlist = () => {
       .then(res => setShoesData(res.data));
   };
   const clickSortPrice = isTrue => {
-    if (!isTrue) {
+    if (isTrue) {
       searchParams.set('sortPrice', 'low');
       setSearchParams(searchParams);
     } else {
@@ -72,7 +72,7 @@ const Itemlist = () => {
       setSearchParams(searchParams);
     }
     fetch(
-      `http://10.58.52.165:3000/products/${gender.gender}?offset=0&limit=8&sortPrice=${sortPrice}`,
+      `http://10.58.52.165:3000/products/${gender.gender}?offset=0&limit=8&sort=${sortPrice}`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
@@ -80,6 +80,10 @@ const Itemlist = () => {
     )
       .then(res => res.json())
       .then(res => setShoesData(res.data));
+  };
+
+  const sortReset = () => {
+    setSearchParams({ offset: 0, limit: 8 });
   };
   return (
     <div className="itemList" onClick={handleWindow}>
@@ -98,6 +102,7 @@ const Itemlist = () => {
           setIsFilter={setIsFilter}
           clickSortLatest={clickSortLatest}
           clickSortPrice={clickSortPrice}
+          sortReset={sortReset}
         />
       )}
       <div className="pagination">

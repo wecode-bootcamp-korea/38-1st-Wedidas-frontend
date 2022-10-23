@@ -26,7 +26,7 @@ const ItemProduct = ({ data }) => {
             src={data.thumbnailUrl}
             alt="신발사진"
           />
-          <p className="itemPrice">{priceToString(data.price)}</p>
+          <p className="itemPrice">{priceToString(parseInt(data.price))} 원</p>
         </div>
         <div className="itemTextBox">
           <p className="itemName">{data.name}</p>

@@ -2,13 +2,27 @@ import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import './FilterAndSort.scss';
 
-const FilterAndSort = ({ setIsFilter, clickSortLatest, clickSortPrice }) => {
+const FilterAndSort = ({
+  setIsFilter,
+  clickSortLatest,
+  clickSortPrice,
+  sortReset,
+}) => {
   const [isSelected, setIsSelected] = useState({
     latest: false,
-    price: null,
+    lowprice: false,
+    highprice: false,
     size: false,
   });
-
+  const clickReset = () => {
+    setIsSelected({
+      latest: false,
+      lowprice: false,
+      highprice: false,
+      size: false,
+    });
+    sortReset();
+  };
   const handleSelected = event => {
     const { name } = event.target;
     setIsSelected({
@@ -19,14 +33,6 @@ const FilterAndSort = ({ setIsFilter, clickSortLatest, clickSortPrice }) => {
 
   const clickClose = () => {
     setIsFilter(false);
-  };
-
-  const clickReset = () => {
-    setIsSelected({
-      latest: false,
-      price: false,
-      size: false,
-    });
   };
   return (
     <div className="filterAndSort">
@@ -44,12 +50,18 @@ const FilterAndSort = ({ setIsFilter, clickSortLatest, clickSortPrice }) => {
           <AiOutlineClose onClick={clickClose} className="filterAndSortClose" />
         </div>
       </div>
-      <ul>
+      <form
+        onClick={e => {
+          e.preventDefault();
+        }}
+      >
         <button
+          type="radio"
           className={`filterAndSortList ${
             isSelected.latest ? 'selected' : 'bordernone'
           }`}
           onClick={e => {
+            clickReset();
             handleSelected(e);
             clickSortLatest(isSelected.latest);
           }}
@@ -57,37 +69,34 @@ const FilterAndSort = ({ setIsFilter, clickSortLatest, clickSortPrice }) => {
         >
           최근 순
         </button>
-        <form
+        <button
+          type="radio"
+          className={`filterAndSortList ${
+            isSelected.lowprice ? 'selected' : 'bordernone'
+          }`}
           onClick={e => {
-            e.preventDefault();
+            clickReset();
+            handleSelected(e);
+            clickSortPrice(isSelected.price);
           }}
+          name="lowprice"
         >
-          <button
-            className={`filterAndSortList ${
-              isSelected.price ? 'selected' : 'bordernone'
-            }`}
-            onClick={e => {
-              handleSelected(e);
-              clickSortPrice(isSelected.price);
-            }}
-            name="price"
-          >
-            가격 낮은 순
-          </button>
-          <button
-            type="radio"
-            className={`filterAndSortList ${
-              isSelected.price ? 'bordernone' : 'selected'
-            }`}
-            onClick={e => {
-              handleSelected(e);
-              clickSortPrice(isSelected.price);
-            }}
-            name="price"
-          >
-            가격 높은 순
-          </button>
-        </form>
+          가격 낮은 순
+        </button>
+        <button
+          type="radio"
+          className={`filterAndSortList ${
+            isSelected.highprice ? 'selected' : 'bordernone'
+          }`}
+          onClick={e => {
+            clickReset();
+            handleSelected(e);
+            clickSortPrice(isSelected.price);
+          }}
+          name="highprice"
+        >
+          가격 높은 순
+        </button>
         <button
           type="radio"
           className={`filterAndSortList ${
@@ -98,7 +107,7 @@ const FilterAndSort = ({ setIsFilter, clickSortLatest, clickSortPrice }) => {
         >
           사이즈
         </button>
-      </ul>
+      </form>
     </div>
   );
 };
