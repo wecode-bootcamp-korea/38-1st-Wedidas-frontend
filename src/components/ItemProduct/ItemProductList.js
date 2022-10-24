@@ -8,7 +8,6 @@ const ItemProduct = ({ data }) => {
   const handleWishClick = () => {
     setIsWish(!isWish);
   };
-  console.log(data);
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
