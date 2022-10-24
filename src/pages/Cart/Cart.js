@@ -1,32 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CartHeader from './CartHeader';
 import CartItem from './CartItem';
 import CartAside from './CartAside';
 import './Cart.scss';
 
 const Cart = () => {
-  let inititalPrice = 0;
-  const sumTotalPrice = DATA.reduce(
-    (prev, current) => prev + current.price,
-    inititalPrice
-  );
+  const [cartItem, setCartItem] = useState([]);
+  const [price, setPrice] = useState(0);
 
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  useEffect(() => {
+    fetch('http://10.58.52.114:3000/cart', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+    })
+      .then(res => res.json())
+      .then(res => setCartItem(res));
+  }, []);
   return (
     <div className="cart">
       <div className="cartLeft">
-        <CartHeader
-          length={DATA.length}
-          totalPrice={priceToString(sumTotalPrice)}
-        />
+        <CartHeader length={DATA.length} price={priceToString(price)} />
         {DATA.map(data => (
-          <CartItem key={data.id} data={data} priceToString={priceToString} />
+          <CartItem
+            key={data.id}
+            data={data}
+            priceToString={priceToString}
+            setPrice={setPrice}
+          />
         ))}
       </div>
-      <CartAside totalPrice={priceToString(sumTotalPrice)} />
+      <CartAside price={priceToString(price)} />
     </div>
   );
 };

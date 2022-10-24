@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { CiHeart } from 'react-icons/ci';
 import { SlArrowDown } from 'react-icons/sl';
 import './CartItem.scss';
 
-const CartItem = ({ data, priceToString }) => {
+const CartItem = ({ data, priceToString, setPrice }) => {
+  useEffect(() => {
+    setPrice(prev => prev + data.price * parseInt(numberOfShoe));
+  }, []);
   const [isSelect, setIsSelect] = useState(false);
   const [numberOfShoe, setNumberOfShoe] = useState('1');
 
   const numberOfShoeClick = e => {
     setNumberOfShoe(e.target.value);
+    setPrice(prev => prev + data.price * parseInt(numberOfShoe));
     setIsSelect(false);
   };
 
@@ -36,7 +40,9 @@ const CartItem = ({ data, priceToString }) => {
         <div>
           <div className="cartItemXbox">
             <span className="cartItemName">{data.name}</span>
-            <span className="cartItemPrice">{priceToString(data.price)}원</span>
+            <span className="cartItemPrice">
+              {priceToString(data.price * parseInt(numberOfShoe))}원
+            </span>
             <AiOutlineClose />
           </div>
           <div className="cartItemHeartBox">
