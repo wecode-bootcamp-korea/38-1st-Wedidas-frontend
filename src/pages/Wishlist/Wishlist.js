@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import WishProduct from './components/WishProduct';
 import Button from '../../components/Button/Button';
@@ -10,12 +10,12 @@ const Wishlist = () => {
     '아직 관심 목록에 저장한 항목이 없습니다. 쇼핑을 시작하고 관심 목록에 좋아하는 제품을 추가하세요.';
 
   useEffect(() => {
-    fetch('http://10.58.52.231:3000/wishlists', {
+    fetch('http://10.58.52.114:3000/wishlists', {
       method: 'GET',
       headers: {
-        // Authorization: localStorage.getItem('token'),
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjM0MzA4MywiZXhwIjoxNjY3MTIwNjgzfQ.TrSZfWZYTYsCkQEYAjarC_BuWh5cK8QTfLHR83WpIaQ',
+        authorization: localStorage.getItem('token'),
+        // authorization:
+        //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjM0MzA4MywiZXhwIjoxNjY3MTIwNjgzfQ.TrSZfWZYTYsCkQEYAjarC_BuWh5cK8QTfLHR83WpIaQ',
       },
     })
       .then(res => res.json())
@@ -24,12 +24,9 @@ const Wishlist = () => {
       });
   }, [wishItemList]);
 
-  const onRemove = useCallback(
-    id => {
-      setWishItemList(wishItemList.filter(item => item.productId !== id));
-    },
-    [wishItemList]
-  );
+  const onRemove = id => {
+    setWishItemList(wishItemList.filter(item => item.productId !== id));
+  };
 
   return (
     <div className="wishList">

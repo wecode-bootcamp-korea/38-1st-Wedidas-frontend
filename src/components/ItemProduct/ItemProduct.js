@@ -14,13 +14,8 @@ const ItemProduct = ({ data }) => {
 
   return (
     <div className="itemProduct">
-      <Link>
+      <Link to="/">
         <div className="itemProductImgBox">
-          {!isWish ? (
-            <HiOutlineHeart className="heartIcon" onClick={handleWishClick} />
-          ) : (
-            <HiHeart className="heartIcon" onClick={handleWishClick} />
-          )}
           <img
             className="itemProductImg"
             src={data.thumbnailUrl}
@@ -33,6 +28,11 @@ const ItemProduct = ({ data }) => {
           <p className="itemCategory">{data.categoryname}</p>
         </div>
       </Link>
+      {!isWish ? (
+        <HiOutlineHeart className="heartIcon" onClick={handleWishClick} />
+      ) : (
+        <HiHeart className="heartIcon" onClick={handleWishClick} />
+      )}
     </div>
   );
 };

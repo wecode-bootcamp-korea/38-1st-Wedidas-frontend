@@ -10,12 +10,12 @@ const WishProduct = ({ data, onRemove }) => {
   };
 
   const deleteItem = () => {
-    fetch(`http://10.58.52.231:3000/wishlists?productId=${data.productId}`, {
+    fetch(`http://10.58.52.114:3000/wishlists?productId=${data.productId}`, {
       method: 'DELETE',
       headers: {
-        // Authorization: localStorage.getItem('token'),
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjM0MzA4MywiZXhwIjoxNjY3MTIwNjgzfQ.TrSZfWZYTYsCkQEYAjarC_BuWh5cK8QTfLHR83WpIaQ',
+        authorization: localStorage.getItem('token'),
+        // authorization:
+        //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjM0MzA4MywiZXhwIjoxNjY3MTIwNjgzfQ.TrSZfWZYTYsCkQEYAjarC_BuWh5cK8QTfLHR83WpIaQ',
       },
     });
   };

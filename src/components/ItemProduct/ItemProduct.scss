@@ -2,20 +2,20 @@
   position: relative;
   width: 250px;
 
+  .heartIcon {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-size: cover;
+  }
+
   .itemProductImgBox {
     position: relative;
     width: 100%;
 
     .itemProductImg {
       width: 100%;
-    }
-
-    .heartIcon {
-      display: block;
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background-size: cover;
     }
 
     .itemPrice {
