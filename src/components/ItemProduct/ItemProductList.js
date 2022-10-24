@@ -8,49 +8,50 @@ const ItemProduct = ({ data }) => {
   const handleWishClick = () => {
     setIsWish(!isWish);
   };
+  console.log(data);
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
   const clickHeart = () => {
-    fetch('api주소', {
+    fetch('http://10.58.52.114:3000/wishlists', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        accsessToken: localStorage.getItem('token'),
-      }
-      body : JSON.stringify({
-        productId : data.productId
-      }
-      ),
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o',
+      },
+      body: JSON.stringify({
+        productId: data.productId,
+      }),
     });
   };
   return (
     <div className="itemProduct">
-      <Link>
+      <Link to={`/detail/${data.id}`}>
         <div className="itemProductImgBox">
-          {!isWish ? (
-            <HiOutlineHeart className="heartIcon" onClick={handleWishClick} />
-          ) : (
-            <HiHeart
-              className="heartIcon"
-              onClick={() => {
-                handleWishClick();
-                clickHeart();
-              }}
-            />
-          )}
           <img
             className="itemProductImg"
             src={data.thumbnailUrl}
             alt="신발사진"
           />
-          <p className="itemPrice">{priceToString(data.price)}</p>
+          <p className="itemPrice">{priceToString(parseInt(data.price))} 원</p>
         </div>
         <div className="itemTextBox">
           <p className="itemName">{data.name}</p>
-          <p className="itemCategory">{data.categoryname}</p>
+          <p className="itemCategory">{data.category}</p>
         </div>
       </Link>
+      {!isWish ? (
+        <HiOutlineHeart
+          className="heartIcon"
+          onClick={() => {
+            handleWishClick();
+            clickHeart();
+          }}
+        />
+      ) : (
+        <HiHeart className="heartIcon" onClick={handleWishClick} />
+      )}
     </div>
   );
 };

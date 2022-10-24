@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useSearchParams, useParams, Link } from 'react-router-dom';
 import ItemListTop from './ItemListTop';
-import ItemProductList from '../../components/ItemProduct/ItemProduct';
+import ItemProductList from '../../components/ItemProduct/ItemProductList';
 import FilterAndSort from './FilterAndSort/FilterAndSort';
 import './Itemlist.scss';
 
 const Itemlist = () => {
   const [shoesData, setShoesData] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({
+    sort: '',
+    offset: 0,
+    limit: 8,
+  });
   const gender = useParams();
-
   const offset = searchParams.get('offset');
   const limit = searchParams.get('limit');
   const sort = searchParams.get('sort');
-
+  console.log(shoesData);
   useEffect(() => {
     fetch(
-      `http://10.58.52.165:3000/products/${gender.gender}?sort=${sort}&offset=${offset}&limit=${limit}`,
+      `http://10.58.52.108:3000/products/${gender.gender}?sort=${sort}&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
       }
     )
       .then(res => res.json())
-      .then(res => setShoesData(res.data));
+      .then(res => setShoesData(res.data))
+      .then(console.log(shoesData));
   }, [offset, limit, sort]);
 
   const handleWindow = e => {
@@ -58,11 +62,13 @@ const Itemlist = () => {
         gender={gender.gender}
         shoesData={shoesData}
       />
+
       <div className="itemListProducts">
         {shoesData?.map(item => (
           <ItemProductList key={item.id} data={item} />
         ))}
       </div>
+
       {isFilter && (
         <FilterAndSort
           setIsFilter={setIsFilter}

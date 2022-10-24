@@ -5,15 +5,15 @@ import './FilterAndSort.scss';
 const FilterAndSort = ({ setIsFilter, sortReset, clickSort }) => {
   const [isSelected, setIsSelected] = useState({
     new: false,
-    lowprice: false,
-    highprice: false,
+    low: false,
+    high: false,
   });
 
   const clickReset = () => {
     setIsSelected({
       new: false,
-      lowprice: false,
-      highprice: false,
+      low: false,
+      high: false,
     });
     sortReset();
   };
@@ -22,8 +22,8 @@ const FilterAndSort = ({ setIsFilter, sortReset, clickSort }) => {
     const { name } = event.target;
     setIsSelected({
       new: false,
-      lowprice: false,
-      highprice: false,
+      low: false,
+      high: false,
       [name]: !isSelected[name],
     });
     clickSort([name], isSelected[event.target.name]);
@@ -67,23 +67,23 @@ const FilterAndSort = ({ setIsFilter, sortReset, clickSort }) => {
         </button>
         <button
           className={`filterAndSortList ${
-            isSelected.lowprice ? 'selected' : 'bordernone'
+            isSelected.low ? 'selected' : 'bordernone'
           }`}
           onClick={e => {
             handleSelected(e);
           }}
-          name="lowprice"
+          name="low"
         >
           가격 낮은 순
         </button>
         <button
           className={`filterAndSortList ${
-            isSelected.highprice ? 'selected' : 'bordernone'
+            isSelected.high ? 'selected' : 'bordernone'
           }`}
           onClick={e => {
             handleSelected(e);
           }}
-          name="highprice"
+          name="high"
         >
           가격 높은 순
         </button>
