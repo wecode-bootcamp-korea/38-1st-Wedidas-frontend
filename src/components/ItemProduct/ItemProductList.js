@@ -17,8 +17,7 @@ const ItemProduct = ({ data }) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o',
+        Authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         productId: data.productId,
