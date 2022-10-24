@@ -28,6 +28,7 @@ const FilterAndSort = ({ setIsFilter, sortReset, clickSort }) => {
     });
     clickSort([name], isSelected[event.target.name]);
   };
+
   const clickClose = () => {
     setIsFilter(false);
   };
