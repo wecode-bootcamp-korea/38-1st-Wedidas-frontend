@@ -6,20 +6,18 @@ import FilterAndSort from './FilterAndSort/FilterAndSort';
 import './Itemlist.scss';
 
 const Itemlist = () => {
-  const [shoesData, setShoesData] = useState(null);
+  const [shoesData, setShoesData] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-
   const gender = useParams();
 
   const offset = searchParams.get('offset');
   const limit = searchParams.get('limit');
-  const sortPrice = searchParams.get('sortPrice');
   const sort = searchParams.get('sort');
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.165:3000/products/${gender.gender}?offset=${offset}&limit=${limit}`,
+      `http://10.58.52.165:3000/products/${gender.gender}?sort=${sort}&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
@@ -27,7 +25,7 @@ const Itemlist = () => {
     )
       .then(res => res.json())
       .then(res => setShoesData(res.data));
-  }, [offset, limit]);
+  }, [offset, limit, sort]);
 
   const handleWindow = e => {
     const clicked = e.target.closest('.filterAndSort');
@@ -46,44 +44,12 @@ const Itemlist = () => {
     setSearchParams(searchParams);
   };
 
-  const clickSortLatest = isTrue => {
-    if (!isTrue) {
-      searchParams.set('sort', 'new');
-      setSearchParams(searchParams);
-    } else {
-      setSearchParams({ offset: 0, limit: 8 });
-    }
-    fetch(
-      `http://10.58.52.165:3000/products/${gender.gender}?&sort=${sort}offset=0&limit=8`,
-      {
-        method: 'GET',
-        headers: { 'content-type': 'application/json' },
-      }
-    )
-      .then(res => res.json())
-      .then(res => setShoesData(res.data));
-  };
-  const clickSortPrice = isTrue => {
-    if (isTrue) {
-      searchParams.set('sortPrice', 'low');
-      setSearchParams(searchParams);
-    } else {
-      searchParams.set('sortPrice', 'high');
-      setSearchParams(searchParams);
-    }
-    fetch(
-      `http://10.58.52.165:3000/products/${gender.gender}?offset=0&limit=8&sort=${sortPrice}`,
-      {
-        method: 'GET',
-        headers: { 'content-type': 'application/json' },
-      }
-    )
-      .then(res => res.json())
-      .then(res => setShoesData(res.data));
+  const clickSort = isSelected => {
+    setSearchParams({ sort: isSelected, offset: 0, limit: 8 });
   };
 
   const sortReset = () => {
-    setSearchParams({ offset: 0, limit: 8 });
+    setSearchParams({ sort: '', offset: 0, limit: 8 });
   };
   return (
     <div className="itemList" onClick={handleWindow}>
@@ -100,9 +66,8 @@ const Itemlist = () => {
       {isFilter && (
         <FilterAndSort
           setIsFilter={setIsFilter}
-          clickSortLatest={clickSortLatest}
-          clickSortPrice={clickSortPrice}
           sortReset={sortReset}
+          clickSort={clickSort}
         />
       )}
       <div className="pagination">
