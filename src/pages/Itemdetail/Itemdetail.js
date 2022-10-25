@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { BsArrow90DegLeft } from 'react-icons/bs';
 import { BiRuler } from 'react-icons/bi';
-import { TbTruckDelivery } from 'react-icons/tb';
+import { TbHeading, TbTruckDelivery } from 'react-icons/tb';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { AiOutlineCheckCircle, AiOutlineCheck } from 'react-icons/ai';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
@@ -13,32 +13,82 @@ import './Itemdetail.scss';
 const Itemdetail = () => {
   const navigate = useNavigate();
   const [productDetail, setProductDetail] = useState([]);
+  const [productSize, setProductSize] = useState('');
   const [readmore, setReadmore] = useState(false);
+  const [buttonToggle, setButtonToggle] = useState(false);
+  const params = useParams();
+  const productId = params.id;
+
+  console.log(productSize);
+  console.log(productDetail);
+
   const toggleMenu = () => {
     setReadmore(readmore => !readmore);
   };
 
+  const toggleActive = e => {
+    setButtonToggle(prev => !prev);
+  };
+
+  const saveSize = event => {
+    setProductSize(event.target.value);
+  };
+
   useEffect(() => {
-    fetch('/data/itemdetaillist.json', {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setProductDetail(data);
-      });
+    fetch('/data/itemditto.json')
+      .then(data => data.json())
+      .then(data => setProductDetail(data));
   }, []);
 
-  return productDetail.map(item => (
-    <div key={item.id} className="detailpage">
+  const sendtoCart = () => {
+    fetch('http://10.58.52.114:3000/carts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`,
+      },
+      body: JSON.stringify({
+        productId: productDetail.id,
+        sizeId: productSize,
+      }),
+    })
+      .then(data => data.json())
+      .then(data => {
+        if (data.MESSAGE === 'SUCCESS') {
+          localStorage.setItem('access-token', data.access_token);
+          alert('Added to shopping cart!');
+        } else if (data.MESSAGE === 'Out of stock') {
+          alert('Sorry, this product is out of stock');
+        } else if (data.MESSAGE === 'KEY_ERROR') {
+          alert('Key-error occured');
+        }
+      });
+  };
+
+  const sendtoWishlist = () => {
+    fetch('http://10.58.52.114:3000/wishlists', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`,
+      },
+      body: JSON.stringify({
+        productId: productDetail.id,
+      }),
+    });
+  };
+
+  return (
+    <div className="detailpage">
       <div className="detailpageDetailSection">
         <div className="imageList">
           <img
             className="productThumbnail"
-            src={item.mainimage}
+            src={productDetail.thumbnail}
             alt="mainimage"
           />
           {readmore
-            ? item.thumbnail.map(el => (
+            ? productDetail.imageUrl.map(el => (
                 <img
                   className="additionalThumbnail"
                   key={el}
@@ -114,24 +164,40 @@ const Itemdetail = () => {
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
           <div className="categoryAndReview">
-            <p>{item.categoryname}</p>
+            <p>{productDetail.category}</p>
             <p>review (임시)</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">{item.name}</p>
-            <p className="price"> {item.price}</p>
+            <p className="productName">{productDetail.name}</p>
+            <p className="price"> {productDetail.price}</p>
             <p className="availableColors"> 컬러</p>
           </div>
         </div>
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
-          {productDetail
-            .filter((item, index) => item.sizes > 0)
-            .map(item => (
-              <button key={item} class="sizeButton">
-                {item.sizes}
+          <div className="sizeButtonList">
+            {/* {productDetail.size.map(el => (
+              <button className="sizeButton" onClick={saveSize}>
+                {el}
               </button>
-            ))}
+            ))} */}
+            <button
+              className={!buttonToggle ? 'sizeButton' : 'darkSizeButton'}
+              value="2"
+              onClick={() => {
+                saveSize();
+                toggleActive();
+              }}
+            >
+              250
+            </button>
+            <button className="sizeButton" value="3" onClick={saveSize}>
+              260
+            </button>
+            <button className="sizeButton" value="4" onClick={saveSize}>
+              270
+            </button>
+          </div>
           <div className="sizeGuide">
             <span className="rulerIcon">
               <BiRuler />
@@ -141,13 +207,13 @@ const Itemdetail = () => {
         </div>
         <div className="rightLowerButtonList">
           <div className="firstButtonRow">
-            <button className="shoppingBagButton">
+            <button className="shoppingBagButton" onClick={sendtoCart}>
               <span>장바구니 담기</span>{' '}
               <span>
                 <HiOutlineArrowNarrowRight />{' '}
               </span>
             </button>
-            <button className="heartButton">
+            <button className="heartButton" onClick={sendtoWishlist}>
               <FaRegHeart />
             </button>
           </div>
@@ -185,7 +251,7 @@ const Itemdetail = () => {
         </div>
       </div>
     </div>
-  ));
+  );
 };
 
 export default Itemdetail;

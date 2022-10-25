@@ -205,12 +205,33 @@
       margin-bottom: 20px;
     }
 
+    .sizeButtonList {
+      display: flex;
+      justify-content: center;
+    }
+
     .sizeButton {
       outline: none;
       border: 1px solid #eceff1;
       height: 40px;
       width: 74px;
       background-color: white;
+    }
+
+    .sizeButtonList :hover {
+      background-color: black;
+      color: white;
+      cursor: pointer;
+    }
+
+    .darkSizeButton {
+      background-color: black;
+      color: white;
+      cursor: pointer;
+      height: 40px;
+      width: 74px;
+      outline: none;
+      border: 1px solid #eceff1;
     }
 
     .sizeGuide {
