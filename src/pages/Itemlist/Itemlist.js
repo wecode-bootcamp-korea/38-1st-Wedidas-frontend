@@ -10,11 +10,7 @@ const Itemlist = () => {
   const EIGHT = 8;
   const [shoesData, setShoesData] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams({
-    sort: '',
-    offset: 0,
-    limit: EIGHT,
-  });
+  const [searchParams, setSearchParams] = useSearchParams();
   const gender = useParams();
   const offset = searchParams.get('offset');
   const limit = searchParams.get('limit');
@@ -30,7 +26,7 @@ const Itemlist = () => {
     )
       .then(res => res.json())
       .then(res => setShoesData(res.data));
-  }, [gender.gender, offset, limit, sort]);
+  }, [gender.gender, limit, offset, sort]);
 
   const handleWindow = e => {
     const clicked = e.target.closest('.filterAndSort');
@@ -78,32 +74,23 @@ const Itemlist = () => {
         />
       )}
       <div className="pagination">
-        <button
-          className="pagingBtn"
-          onClick={() => {
-            pagination(1);
-          }}
-        >
-          1
-        </button>
-        <button
-          className="pagingBtn"
-          onClick={() => {
-            pagination(2);
-          }}
-        >
-          2
-        </button>
-        <button
-          className="pagingBtn"
-          onClick={() => {
-            pagination(3);
-          }}
-        >
-          3
-        </button>
+        {PAGE_NUMBER.map(num => {
+          return (
+            <button
+              className="pagingBtn"
+              key={num}
+              onClick={() => {
+                pagination(num);
+              }}
+            >
+              {num}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 };
 export default Itemlist;
+
+const PAGE_NUMBER = [1, 2, 3];
