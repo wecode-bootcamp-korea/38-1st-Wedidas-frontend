@@ -13,9 +13,9 @@ const Footer = () => {
               <div className="listWrap" key={lists.id}>
                 <p className="title">{lists.title}</p>
                 <ul className="linkWrap">
-                  {lists.content.map(list => {
+                  {lists.content.map((list, idx) => {
                     return (
-                      <li>
+                      <li key={`${idx}_${list.listmenu}`}>
                         <Link to={list.url}>{list.listmenu}</Link>
                       </li>
                     );
@@ -37,7 +37,7 @@ const Footer = () => {
         <ul className="footerBottomMenu">
           {FOOTER_BOTTOM_LIST.map(list => {
             return (
-              <li>
+              <li key={list.id}>
                 <Link>{list.title}</Link>
               </li>
             );
