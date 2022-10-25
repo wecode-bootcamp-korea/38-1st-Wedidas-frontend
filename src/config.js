@@ -1,14 +1,9 @@
-export const BASE_URL = 'http://10.58.52.108:3000';
+export const BASE_URL_SI = 'http://10.58.52.114:3000';
+export const BASE_URL_DY = 'http://10.58.52.108:3000';
 
 export const api = {
-  signup: `${BASE_URL}/users/signup`,
-  signin: `${BASE_URL}/users/signin`,
-  wishlists: `${BASE_URL}/wishlists`,
-  products: `${BASE_URL}/products/men`,
+  signup: `${BASE_URL_SI}/users/signup`,
+  signin: `${BASE_URL_SI}/users/signin`,
+  wishlists: `${BASE_URL_SI}/wishlists`,
+  products: `${BASE_URL_DY}/products`,
 };
-
-export async function fetcher(destination) {
-  const res = await fetch(api[destination]);
-  const data = await res.json();
-  return data;
-}
