@@ -62,7 +62,7 @@ const Login = () => {
         <form className="loginBox" onSubmit={handleOnsubmit}>
           <div
             className={`inputBox ${
-              emailRegex.test(userInfoValue.email) ? 'emailInputBox' : ''
+              emailRegex.test(userInfoValue.email) ? 'validationInputBox' : ''
             }`}
           >
             <input
@@ -80,7 +80,11 @@ const Login = () => {
                 : '이메일 주소가 유효하지 않습니다'}
             </span>
           </div>
-          <div className={`inputBox ${userInfoValue.pw ? 'pwInputBox' : ''}`}>
+          <div
+            className={`inputBox ${
+              userInfoValue.pw ? 'validationInputBox' : ''
+            }`}
+          >
             <input
               className="input"
               type="password"
