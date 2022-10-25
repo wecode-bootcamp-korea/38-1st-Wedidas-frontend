@@ -7,7 +7,8 @@ const MainSlide = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sources, setSources] = useState([]);
   const slideRef = useRef(null);
-  const totalPage = Math.ceil(sources.length / 4) - 1;
+  const ONE_PAGE = 4;
+  const totalPage = Math.ceil(sources.length / ONE_PAGE) - 1;
   const width = (totalPage + 1) * 100 + '%';
 
   useEffect(() => {
@@ -40,12 +41,12 @@ const MainSlide = () => {
     slideRef.current.style.transform = `translateX(-${
       currentSlide * (100 / (totalPage + 1))
     }%)`;
-    const itemRatio = 100 / (totalPage + 1) / 4;
+    const itemRatio = 100 / (totalPage + 1) / ONE_PAGE;
 
-    if (currentSlide === totalPage && sources.length % 4 !== 0) {
+    if (currentSlide === totalPage && sources.length % ONE_PAGE !== 0) {
       slideRef.current.style.transform = `translateX(-${
         (100 / (totalPage + 1)) * totalPage -
-        itemRatio * (4 - (sources.length % 4))
+        itemRatio * (ONE_PAGE - (sources.length % ONE_PAGE))
       }%)`;
     }
   }, [currentSlide, totalPage, sources.length]);
