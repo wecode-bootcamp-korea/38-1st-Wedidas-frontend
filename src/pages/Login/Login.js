@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BsCheck2, BsArrowRight } from 'react-icons/bs';
 import Button from '../../components/Button/Button';
 import './Login.scss';
+import { api } from '../../config';
 
 const Login = () => {
   const [userInfoValue, setUserInfoValue] = useState({ email: '', pw: '' });
@@ -25,7 +26,7 @@ const Login = () => {
       emailRegex.test(userInfoValue.email) &&
       passwordRegex.test(userInfoValue.password)
     ) {
-      fetch('http://10.58.52.133:3000/users/signin', {
+      fetch(`${api.signin}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
