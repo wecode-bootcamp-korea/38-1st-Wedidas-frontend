@@ -1,14 +1,5 @@
-.itemProduct {
+.wishProduct {
   position: relative;
-  width: 250px;
-
-  .heartIcon {
-    display: block;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background-size: cover;
-  }
 
   .itemProductImgBox {
     position: relative;
@@ -16,6 +7,14 @@
 
     .itemProductImg {
       width: 100%;
+    }
+
+    .heartIcon {
+      display: block;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background-size: cover;
     }
 
     .itemPrice {
@@ -29,7 +28,6 @@
   }
 
   .itemTextBox {
-    height: 90px;
     padding: 10px;
 
     .itemName {
@@ -42,10 +40,8 @@
       font-size: 14px;
     }
   }
-
   &:hover {
     border: 1px black solid;
-
     .itemPrice {
       bottom: 10px;
     }

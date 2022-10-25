@@ -29,6 +29,15 @@
       .inputBox {
         position: relative;
         margin-bottom: 40px;
+
+        &.validationInputBox {
+          .input {
+            border-bottom: 2px solid green;
+          }
+          .alert {
+            color: green;
+          }
+        }
       }
     }
   }
