@@ -4,6 +4,7 @@ import ItemListTop from './ItemListTop';
 import ItemProductList from '../../components/ItemProduct/ItemProductList';
 import FilterAndSort from './FilterAndSort/FilterAndSort';
 import './Itemlist.scss';
+import { api } from '../../config';
 
 const Itemlist = () => {
   const EIGHT = 8;
@@ -21,7 +22,7 @@ const Itemlist = () => {
 
   useEffect(() => {
     fetch(
-      `http://10.58.52.108:3000/products/${gender.gender}?sort=${sort}&offset=${offset}&limit=${limit}`,
+      `${api.products}/${gender.gender}?sort=${sort}&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
