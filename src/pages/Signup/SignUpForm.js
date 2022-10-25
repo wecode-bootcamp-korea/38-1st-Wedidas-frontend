@@ -46,10 +46,10 @@ const SignUpForm = () => {
 
   return (
     <form onSubmit={signUp} className="signUpForm">
-      <div className="inputBox">
+      <div className="inputBox emailInputBox">
         <p className="signUpText">회원가입</p>
         <input
-          className="input"
+          className={userInfo.name === '' ? 'input' : 'green'}
           placeholder="이름을 입력하세요"
           type="text"
           onChange={handleInput}
@@ -57,7 +57,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className="input"
+          className={emailRegex.test(userInfo.email) ? 'green' : 'input'}
           placeholder="이메일을 입력하세요"
           type="email"
           onChange={handleInput}
@@ -65,7 +65,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className="input"
+          className={passwordRegex.test(userInfo.password) ? 'green' : 'input'}
           placeholder="패스워드를 입력하세요(대문자, 특수문자포함 8자이상)"
           type="password"
           onChange={handleInput}
@@ -73,7 +73,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className="input"
+          className={userInfo.phone_number === '' ? 'input' : 'green'}
           placeholder="전화번호를 입력하세요 예시)010-1234-5678"
           type="pattern"
           pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
@@ -82,7 +82,7 @@ const SignUpForm = () => {
           required
         />
         <input
-          className="input"
+          className={userInfo.birthday === '' ? 'input' : 'green'}
           placeholder="생년월일을 입력하세요 예)20001231"
           type="tel"
           onChange={handleInput}
