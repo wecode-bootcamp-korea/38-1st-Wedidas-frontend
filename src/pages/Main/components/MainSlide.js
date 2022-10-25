@@ -3,11 +3,12 @@ import { BsArrowRight, BsArrowLeft } from 'react-icons/bs';
 import ItemProduct from '../../../components/ItemProduct/ItemProduct';
 import './MainSlide.scss';
 
-const TOTAL_SLIDES = 3;
 const MainSlide = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sources, setSources] = useState([]);
   const slideRef = useRef(null);
+  const totalPage = Math.ceil(sources.length / 4) - 1;
+  const width = (totalPage + 1) * 100 + '%';
 
   useEffect(() => {
     fetch('data/MainSlide.json', {
@@ -20,7 +21,7 @@ const MainSlide = () => {
   }, []);
 
   const nextSlide = () => {
-    if (currentSlide >= TOTAL_SLIDES) {
+    if (currentSlide >= totalPage) {
       return;
     } else {
       setCurrentSlide(currentSlide + 1);
@@ -36,8 +37,18 @@ const MainSlide = () => {
 
   useEffect(() => {
     slideRef.current.style.transition = 'all 0.7s ease-in-out';
-    slideRef.current.style.transform = `translateX(-${currentSlide * 25}%)`;
-  }, [currentSlide]);
+    slideRef.current.style.transform = `translateX(-${
+      currentSlide * (100 / (totalPage + 1))
+    }%)`;
+    const itemRatio = 100 / (totalPage + 1) / 4;
+
+    if (currentSlide === totalPage && sources.length % 4 !== 0) {
+      slideRef.current.style.transform = `translateX(-${
+        (100 / (totalPage + 1)) * totalPage -
+        itemRatio * (4 - (sources.length % 4))
+      }%)`;
+    }
+  }, [currentSlide, totalPage, sources.length]);
 
   const moveDot = index => {
     setCurrentSlide(index);
@@ -47,7 +58,7 @@ const MainSlide = () => {
     <div className="mainSlide">
       <h2 className="title">BEST OF WEDIDAS</h2>
       <div className="slideContainer">
-        <div className="slideWrap" ref={slideRef}>
+        <div className="slideWrap" ref={slideRef} style={{ width: width }}>
           {sources.map(source => (
             <ItemProduct className="slideItem" key={source.id} data={source} />
           ))}
@@ -62,13 +73,13 @@ const MainSlide = () => {
       </button>
       <button
         onClick={nextSlide}
-        style={{ opacity: currentSlide >= TOTAL_SLIDES ? 0 : 1 }}
+        style={{ opacity: currentSlide >= totalPage ? 0 : 1 }}
         className="nextBtn slideBtn"
       >
         <BsArrowRight />
       </button>
       <div className="paginationWrap">
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: totalPage + 1 }).map((_, index) => (
           <div
             key={index}
             onClick={() => moveDot(index)}
