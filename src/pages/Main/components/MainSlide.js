@@ -37,7 +37,7 @@ const MainSlide = () => {
   };
 
   useEffect(() => {
-    slideRef.current.style.transition = 'all 0.7s ease-in-out';
+    slideRef.current.style.transition = 'transform 0.7s ease-in-out';
     slideRef.current.style.transform = `translateX(-${
       currentSlide * (100 / (totalPage + 1))
     }%)`;
