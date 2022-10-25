@@ -24,7 +24,7 @@ const WishProduct = ({ data, onRemove }) => {
   };
   return (
     <div className="wishProduct">
-      <Link>
+      <Link to={`detail/${data.id}`}>
         <div className="itemProductImgBox">
           <HiHeart className="heartIcon" onClick={handleWishClick} />
           <img
