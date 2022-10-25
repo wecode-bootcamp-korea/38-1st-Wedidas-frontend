@@ -16,7 +16,7 @@ const ItemProduct = ({ data }) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        Authorization: localStorage.getItem('token'),
+        authorization: localStorage.getItem('token'),
       },
       body: JSON.stringify({
         productId: data.productId,
