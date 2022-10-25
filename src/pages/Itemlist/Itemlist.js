@@ -12,7 +12,7 @@ const Itemlist = () => {
   const [searchParams, setSearchParams] = useSearchParams({
     sort: '',
     offset: 0,
-    limit: 8,
+    limit: EIGHT,
   });
   const gender = useParams();
   const offset = searchParams.get('offset');
