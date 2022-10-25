@@ -6,7 +6,7 @@ import './MainBanner.scss';
 const MainBanner = () => {
   const [isPlayToggle, setIsPlayToggle] = useState(true);
   const [isSoundToggle, setIsSoundToggle] = useState(true);
-  const [delay] = useState(3000);
+  const delay = 3000;
   const [currentImage, setCurrentImage] = useState('');
 
   // FIXME: setInterval을 바로 쓰면서 button클릭시 일시 정지가 안될지 알아본후 지울 예정
