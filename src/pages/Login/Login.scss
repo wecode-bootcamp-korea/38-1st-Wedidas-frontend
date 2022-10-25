@@ -29,6 +29,24 @@
       .inputBox {
         position: relative;
         margin-bottom: 40px;
+
+        &.emailInputBox {
+          .input {
+            border-bottom: 2px solid green;
+          }
+          .alert {
+            color: green;
+          }
+        }
+
+        &.pwInputBox {
+          .input {
+            border-bottom: 2px solid green;
+          }
+          .alert {
+            color: green;
+          }
+        }
       }
     }
   }
