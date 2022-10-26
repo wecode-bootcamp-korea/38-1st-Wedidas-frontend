@@ -6,4 +6,5 @@ export const api = {
   signin: `${BASE_URL_SI}/users/signin`,
   wishlists: `${BASE_URL_SI}/wishlists`,
   products: `${BASE_URL_DY}/products`,
+  carts: `${BASE_URL_DY}/carts`,
 };
