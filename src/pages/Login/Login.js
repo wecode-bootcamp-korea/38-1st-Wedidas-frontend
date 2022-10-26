@@ -23,7 +23,7 @@ const Login = () => {
     e.preventDefault();
     if (
       emailRegex.test(userInfoValue.email) &&
-      passwordRegex.test(userInfoValue.password)
+      passwordRegex.test(userInfoValue.pw)
     ) {
       fetch('http://10.58.52.133:3000/users/signin', {
         method: 'POST',
