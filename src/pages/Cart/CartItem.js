@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { CiHeart } from 'react-icons/ci';
 import { SlArrowDown } from 'react-icons/sl';
 import { api } from '../../config';
 import './CartItem.scss';
 
-const CartItem = ({ data, priceToString, deleteCartItem, setChangeCount }) => {
+const CartItem = ({ data, priceToString, deleteCartItem }) => {
   const [isSelect, setIsSelect] = useState(false);
-  const [price, setPrice] = useState(0);
   const [numberOfShoe, setNumberOfShoe] = useState(data.count);
 
   const numberOfShoeClick = e => {
     const count = parseInt(e.target.value);
     setNumberOfShoe(e.target.value);
-    setPrice(prev => prev + data.price * parseInt(numberOfShoe));
     setIsSelect(false);
     changeStock(count);
   };

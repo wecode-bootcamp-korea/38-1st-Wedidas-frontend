@@ -10,7 +10,6 @@ const Cart = () => {
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
-  const [changeCount, setChangeCount] = useState(false);
 
   useEffect(() => {
     fetch(`${api.carts}`, {
@@ -22,7 +21,7 @@ const Cart = () => {
     })
       .then(res => res.json())
       .then(res => setCartItem(res.selectCart));
-  }, [changeCount]);
+  }, []);
 
   let initialPrice = 0;
 
@@ -48,7 +47,6 @@ const Cart = () => {
             data={data}
             priceToString={priceToString}
             deleteCartItem={deleteCartItem}
-            setChangeCount={setChangeCount}
           />
         ))}
       </div>
