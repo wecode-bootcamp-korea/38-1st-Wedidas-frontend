@@ -29,8 +29,7 @@ const ItemListTop = ({ clickFilter, gender, shoesData }) => {
       <div className="itemListTopFlex">
         <div className="itemListTopCategoryAndItemNum">
           <h4 className="itemListTopCategory">{gender.toUpperCase()}</h4>
-          {/* FIX : 데이터 들어오면 주석해제 */}
-          {/* <span className="itemListTopItemNum">[{shoesData.length}]</span> */}
+          <span className="itemListTopItemNum">[{shoesData.length}]</span>
         </div>
         <button onClick={clickFilter} className="filterAndSortBtn">
           Filter & Sort

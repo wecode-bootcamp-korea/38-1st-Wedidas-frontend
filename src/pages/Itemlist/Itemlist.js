@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useParams, Link } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import ItemListTop from './ItemListTop';
 import ItemProductList from '../../components/ItemProduct/ItemProductList';
 import FilterAndSort from './FilterAndSort/FilterAndSort';
-import './Itemlist.scss';
 import { api } from '../../config';
+import './Itemlist.scss';
 
 const Itemlist = () => {
   const EIGHT = 8;
