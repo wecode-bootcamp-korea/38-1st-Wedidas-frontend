@@ -41,12 +41,10 @@ const Itemdetail = () => {
     `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`
   );
 
-  console.log(productDetail);
-
   // useEffect(() => {
   //   fetch(`http://10.58.52.160:3000/products/${productId}`)
   //     .then(data => data.json())
-  //     .then(data => setProductDetail(data));
+  //     .then(data => setProductDetail(data.data));
   // }, [productId]);
 
   const sendtoCart = () => {
@@ -126,7 +124,7 @@ const Itemdetail = () => {
             </span>
           </button>
           <button>
-            <span>productDetail.data.description</span>{' '}
+            <span>정보</span>{' '}
             <span>
               <IoIosArrowDown />
             </span>
