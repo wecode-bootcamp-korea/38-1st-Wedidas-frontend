@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BsCheck2, BsArrowRight } from 'react-icons/bs';
 import Button from '../../components/Button/Button';
 import './Login.scss';
+import { api } from '../../config';
 
 const Login = () => {
   const [userInfoValue, setUserInfoValue] = useState({ email: '', pw: '' });
@@ -10,8 +11,6 @@ const Login = () => {
 
   const emailRegex =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
   const onChangeUserInfoValue = event => {
     setUserInfoValue({
@@ -22,7 +21,7 @@ const Login = () => {
   const handleOnsubmit = e => {
     e.preventDefault();
     if (emailRegex.test(userInfoValue.email)) {
-      fetch('http://10.58.52.133:3000/users/signin', {
+      fetch(`${api.signin}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
