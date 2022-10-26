@@ -26,7 +26,7 @@ const Itemlist = () => {
     )
       .then(res => res.json())
       .then(res => setShoesData(res.data));
-  }, [params.gender, limit, offset, sort]);
+  }, [params.gender, params.category, limit, offset, sort]);
 
   const handleWindow = e => {
     const clicked = e.target.closest('.filterAndSort');
