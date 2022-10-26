@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../config';
 import './SignUpForm.scss';
 
 const SignUpForm = () => {
@@ -29,7 +30,7 @@ const SignUpForm = () => {
       emailRegex.test(userInfo.email) &&
       passwordRegex.test(userInfo.password)
     ) {
-      fetch('http://10.58.52.133:3000/users/signup', {
+      fetch(`${api.signup}`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
