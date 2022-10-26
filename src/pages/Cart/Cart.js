@@ -7,10 +7,10 @@ import './Cart.scss';
 
 const Cart = () => {
   const [cartItem, setCartItem] = useState([]);
-  const [price, setPrice] = useState(0);
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
+  const [changeCount, setChangeCount] = useState(false);
 
   useEffect(() => {
     fetch(`${api.carts}`, {
@@ -22,27 +22,37 @@ const Cart = () => {
     })
       .then(res => res.json())
       .then(res => setCartItem(res.selectCart));
-  }, [cartItem]);
+  }, [changeCount]);
+
+  let initialPrice = 0;
+
+  const sumTotalPrice = cartItem?.reduce(
+    (prev, current) => prev + parseInt(current.price) * parseInt(current.count),
+    initialPrice
+  );
 
   const deleteCartItem = id => {
-    setCartItem(cartItem.filter(item => item.productId !== id));
+    setCartItem(cartItem.filter(item => item.productOptionId !== id));
   };
 
   return (
     <div className="cart">
       <div className="cartLeft">
-        <CartHeader length={cartItem.length} price={priceToString(price)} />
+        <CartHeader
+          length={cartItem.length}
+          sumTotalPrice={priceToString(sumTotalPrice)}
+        />
         {cartItem.map(data => (
           <CartItem
             key={data.id}
             data={data}
             priceToString={priceToString}
-            setPrice={setPrice}
             deleteCartItem={deleteCartItem}
+            setChangeCount={setChangeCount}
           />
         ))}
       </div>
-      <CartAside price={priceToString(price)} />
+      <CartAside sumTotalPrice={priceToString(sumTotalPrice)} />
     </div>
   );
 };

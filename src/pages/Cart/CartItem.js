@@ -5,8 +5,9 @@ import { SlArrowDown } from 'react-icons/sl';
 import { api } from '../../config';
 import './CartItem.scss';
 
-const CartItem = ({ data, priceToString, setPrice, deleteCartItem }) => {
+const CartItem = ({ data, priceToString, deleteCartItem, setChangeCount }) => {
   const [isSelect, setIsSelect] = useState(false);
+  const [price, setPrice] = useState(0);
   const [numberOfShoe, setNumberOfShoe] = useState(data.count);
 
   const numberOfShoeClick = e => {
@@ -51,7 +52,7 @@ const CartItem = ({ data, priceToString, setPrice, deleteCartItem }) => {
   };
 
   const handleDelete = () => {
-    deleteCartItem(data.productId);
+    deleteCartItem(data.productOptionId);
     clickDelete();
   };
 
@@ -65,7 +66,14 @@ const CartItem = ({ data, priceToString, setPrice, deleteCartItem }) => {
           authorization: localStorage.getItem('token'),
         },
       }
-    );
+    )
+      .then(res => res.json())
+      .then(data => {
+        if (data.message == 'FAILED') {
+          alert('재고가 없습니다.');
+        }
+        window.location.reload();
+      });
   };
 
   return (
