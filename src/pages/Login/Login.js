@@ -38,8 +38,11 @@ const Login = () => {
           throw new Error('통신실패');
         })
         .then(data => {
-          if (data.message === 'INVALID_PASSWORD') {
-            alert('비밀번호를 확인해 주세요.');
+          if (
+            data.message === 'INVALID_PASSWORD' ||
+            data.message === 'INVALID_EMAIL'
+          ) {
+            alert('이메일과 비밀번호를 다시 확인해 주세요.');
           } else {
             localStorage.setItem('token', data.accessToken);
             navigate('/');
