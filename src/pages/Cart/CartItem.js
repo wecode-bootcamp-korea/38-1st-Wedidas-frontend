@@ -10,7 +10,7 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
   const [numberOfShoe, setNumberOfShoe] = useState(data.count);
 
   const numberOfShoeClick = e => {
-    const count = parseInt(e.target.value);
+    const count = e.target.value;
     setNumberOfShoe(e.target.value);
     setIsSelect(false);
     changeStock(count);
@@ -103,9 +103,14 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
           <SlArrowDown />
         </button>
         {isSelect && (
-          <ul className="selectList" onClick={numberOfShoeClick}>
+          <ul className="selectList">
             {SIZE.map(el => (
-              <li className="listItem" value={el} key={el}>
+              <li
+                className="listItem"
+                value={el}
+                key={el}
+                onClick={numberOfShoeClick}
+              >
                 {el}
               </li>
             ))}
@@ -117,4 +122,4 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
 };
 export default CartItem;
 
-const SIZE = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const SIZE = [1, 2, 3, 4, 5, 6, 7, 8, 9];
