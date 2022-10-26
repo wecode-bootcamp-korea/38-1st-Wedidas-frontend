@@ -109,12 +109,15 @@ const Nav = () => {
                 <Link to="/cart">
                   <RiShoppingBagLine className="iconBag" />
                 </Link>
-                {/* {wishlistFetch.userId === userid ? 
-                <p className='numbersofItemsinCart'>{wishlistFetch.userId.total{wishlistFetch.userId.total > 0 ? wishlistFetch.userId.total : null}}</p>
-              : null }  */}
               </div>
             </div>
           </div>
+          {/* {wishlistFetch.userId === userid ? (
+                  <p className="numbersofItemsinCart">
+                    {wishlistFetch.userId.total ?? null}
+                  </p>
+                ) : null} */}
+          <p className="numberofItemsinCart">1</p>
         </div>
       </nav>
       <div className="hoverWholeBox">
