@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
 import { GiSpeakerOff, GiSpeaker } from 'react-icons/gi';
 import './MainBanner.scss';
@@ -6,51 +6,24 @@ import './MainBanner.scss';
 const MainBanner = () => {
   const [isPlayToggle, setIsPlayToggle] = useState(true);
   const [isSoundToggle, setIsSoundToggle] = useState(true);
-  const delay = 3000;
   const [currentImage, setCurrentImage] = useState('');
 
-  // FIXME: setInterval을 바로 쓰면서 button클릭시 일시 정지가 안될지 알아본후 지울 예정
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     if (currentImage === 'show') {
-  //       setCurrentImage('');
-  //     } else if (currentImage === '') {
-  //       setCurrentImage('show');
-  //     }
-  //   }, 3000);
-  //   return () => {
-  //     clearInterval(timer);
-  //   };
-  // }, [currentImage]);
-
-  const useInterval = (callback, delay) => {
-    const savedCallback = useRef();
-
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-      function tick() {
-        savedCallback.current();
-      }
-      if (delay !== null) {
-        let timer = setInterval(tick, delay);
-        return () => clearInterval(timer);
-      }
-    }, [delay]);
-  };
-
-  useInterval(
-    () => {
-      if (currentImage === 'show') {
-        setCurrentImage('');
-      } else if (currentImage === '') {
-        setCurrentImage('show');
-      }
-    },
-    isPlayToggle ? delay : null
-  );
+  useEffect(() => {
+    if (isPlayToggle === true) {
+      const timer = setInterval(() => {
+        if (currentImage === 'show') {
+          setCurrentImage('');
+        } else if (currentImage === '') {
+          setCurrentImage('show');
+        }
+      }, 3000);
+      return () => {
+        clearInterval(timer);
+      };
+    } else {
+      return undefined;
+    }
+  }, [currentImage, isPlayToggle]);
 
   return (
     <div className="mainBanner">
