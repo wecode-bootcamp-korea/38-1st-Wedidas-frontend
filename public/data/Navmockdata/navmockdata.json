@@ -4,10 +4,22 @@
     "gender": "남성",
     "shoes": {
       "name": "신발",
-      "url": "/shoes"
+      "url": "/itemlist/men?sort=&offset=0&limit=8"
     },
-    "shoesCategory": ["오리지널스", "러닝", "슬리퍼"],
-    "shoesLink": ["/originals", "/running", "/slippers"],
+    "shoesCategory": [
+      {
+        "name": "오리지널스",
+        "url": "/itemlist/men/originals"
+      },
+      {
+        "name": "슬리퍼",
+        "url": "/itemlist/men/slipper"
+      },
+      {
+        "name": "사커",
+        "url": "/itemlist/men/soccer"
+      }
+    ],
     "classname": "mshoes"
   },
   {
@@ -17,8 +29,20 @@
       "name": "의류",
       "url": "/cloths"
     },
-    "shoesCategory": ["자켓", "축구 저지", "후디/스웨트셔츠"],
-    "shoesLink": ["./originals", "./running", "./slippers"],
+    "shoesCategory": [
+      {
+        "name": "자켓",
+        "url": "/jacket"
+      },
+      {
+        "name": "축구 저지",
+        "url": "/uniform"
+      },
+      {
+        "name": "후디/스웨트셔츠",
+        "url": "/shirts"
+      }
+    ],
     "classname": "mattires"
   },
   {
@@ -28,8 +52,20 @@
       "name": "용품",
       "url": "/accessories"
     },
-    "shoesCategory": ["양말", "모자", "가방"],
-    "shoesLink": ["./originals", "./running", "./slippers"],
+    "shoesCategory": [
+      {
+        "name": "양말",
+        "url": "/shocks"
+      },
+      {
+        "name": "모자",
+        "url": "/cap"
+      },
+      {
+        "name": "가방",
+        "url": "/bag"
+      }
+    ],
     "classname": "maccessories"
   },
   {
@@ -39,8 +75,20 @@
       "name": "스포츠",
       "url": "/sports"
     },
-    "shoesCategory": ["러닝", "아웃도어", "트레이닝"],
-    "shoesLink": ["./originals", "./running", "./slippers"],
+    "shoesCategory": [
+      {
+        "name": "러닝",
+        "url": "/running"
+      },
+      {
+        "name": "아웃도어",
+        "url": "/outdoor"
+      },
+      {
+        "name": "트레이닝",
+        "url": "/training"
+      }
+    ],
     "classname": "msports"
   },
 
@@ -49,10 +97,22 @@
     "gender": "여성",
     "shoes": {
       "name": "신발",
-      "url": "/womenShoes"
+      "url": "/itemlist/women?sort=&offset=0&limit=8"
     },
-    "shoesCategory": ["오리지널스", "러닝", "슬리퍼"],
-    "shoesLink": ["./originals", "./running", "./slippers"],
+    "shoesCategory": [
+      {
+        "name": "오리지널스",
+        "url": "/itemlist/women/originals"
+      },
+      {
+        "name": "슬리퍼",
+        "url": "/itemlist/women/slipper"
+      },
+      {
+        "name": "사커",
+        "url": "/itemlist/women/soccer"
+      }
+    ],
     "classname": "mshoes"
   },
   {
@@ -62,8 +122,20 @@
       "name": "의류",
       "url": "/cloths"
     },
-    "shoesCategory": ["자켓", "축구 저지", "후디/스웨트셔츠"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesCategory": [
+      {
+        "name": "자켓",
+        "url": "/jacket"
+      },
+      {
+        "name": "축구 저지",
+        "url": "/uniform"
+      },
+      {
+        "name": "후디/스웨트셔츠",
+        "url": "/shirts"
+      }
+    ]
   },
   {
     "id": 7,
@@ -72,8 +144,20 @@
       "name": "용품",
       "url": "/accessories"
     },
-    "shoesCategory": ["양말", "모자", "가방"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesCategory": [
+      {
+        "name": "양말",
+        "url": "/shocks"
+      },
+      {
+        "name": "모자",
+        "url": "/cap"
+      },
+      {
+        "name": "가방",
+        "url": "/bag"
+      }
+    ]
   },
   {
     "id": 8,
@@ -82,21 +166,33 @@
       "name": "스포츠",
       "url": "/sports"
     },
-    "shoesCategory": ["러닝", "아웃도어", "트레이닝"],
-    "shoesLink": ["./originals", "./running", "./slippers"]
+    "shoesCategory": [
+      {
+        "name": "러닝",
+        "url": "/running"
+      },
+      {
+        "name": "아웃도어",
+        "url": "/outdoor"
+      },
+      {
+        "name": "트레이닝",
+        "url": "/training"
+      }
+    ]
   },
   {
     "id": 9,
     "shoes": {
       "name": "남성 전체보기",
-      "url": "/allMens"
+      "url": "/itemlist/men?offset=0&limit=8"
     }
   },
   {
     "id": 10,
     "shoes": {
       "name": "남성신발 전체보기",
-      "url": "/allMensShoes"
+      "url": "/itemlist/men?offset=0&limit=8"
     }
   },
   {
@@ -125,14 +221,14 @@
     "id": 14,
     "shoes": {
       "name": "여성 전체보기",
-      "url": "/allWMens"
+      "url": "/itemlist/women?offest=0&limit=8"
     }
   },
   {
     "id": 15,
     "shoes": {
       "name": "여성신발 전체보기",
-      "url": "/allWMensShoes"
+      "url": "/itemlist/women?offest=0&limit=8"
     }
   },
   {

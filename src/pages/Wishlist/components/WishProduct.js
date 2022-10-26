@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { HiOutlineHeart, HiHeart } from 'react-icons/hi';
-import './ItemProduct.scss';
+import { HiHeart } from 'react-icons/hi';
+import './WishProduct.scss';
+import { api } from '../../../config';
 
-const ItemProduct = ({ data }) => {
-  const [isWish, setIsWish] = useState(false);
+const WishProduct = ({ data, onRemove }) => {
   const handleWishClick = () => {
-    setIsWish(!isWish);
+    onRemove(data.productId);
+    deleteItem();
   };
+
+  const deleteItem = () => {
+    fetch(`${api.wishlists}?productId=${data.productId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    });
+  };
+
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
-
   return (
-    <div className="itemProduct">
-      <Link to="/">
+    <div className="wishProduct">
+      <Link to={`detail/${data.id}`}>
         <div className="itemProductImgBox">
+          <HiHeart className="heartIcon" onClick={handleWishClick} />
           <img
             className="itemProductImg"
             src={data.thumbnailUrl}
@@ -28,12 +39,7 @@ const ItemProduct = ({ data }) => {
           <p className="itemCategory">{data.categoryname}</p>
         </div>
       </Link>
-      {!isWish ? (
-        <HiOutlineHeart className="heartIcon" onClick={handleWishClick} />
-      ) : (
-        <HiHeart className="heartIcon" onClick={handleWishClick} />
-      )}
     </div>
   );
 };
-export default ItemProduct;
+export default WishProduct;

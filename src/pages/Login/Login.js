@@ -3,43 +3,54 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BsCheck2, BsArrowRight } from 'react-icons/bs';
 import Button from '../../components/Button/Button';
 import './Login.scss';
+import { api } from '../../config';
 
 const Login = () => {
   const [userInfoValue, setUserInfoValue] = useState({ email: '', pw: '' });
   const navigate = useNavigate();
 
-  const onChangeUserInfoValue = event =>
+  const emailRegex =
+    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
+  const onChangeUserInfoValue = event => {
     setUserInfoValue({
       ...userInfoValue,
       [event.target.name]: event.target.value,
     });
+  };
   const handleOnsubmit = e => {
     e.preventDefault();
-
-    fetch('http://10.58.52.133:3000/users/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify({
-        email: userInfoValue.email,
-        password: userInfoValue.pw,
-      }),
-    })
-      .then(response => {
-        if (response.ok === true) {
-          return response.json();
-        }
-        throw new Error('통신실패');
+    if (
+      emailRegex.test(userInfoValue.email) &&
+      passwordRegex.test(userInfoValue.password)
+    ) {
+      fetch(`${api.signin}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify({
+          email: userInfoValue.email,
+          password: userInfoValue.pw,
+        }),
       })
-      .then(data => {
-        if (data.message === 'INVALID_PASSWORD') {
-          alert('비밀번호를 확인해 주세요.');
-        } else {
-          localStorage.setItem('token', data.accessToken);
-          navigate('/');
-        }
-      });
+        .then(response => {
+          if (response.ok === true) {
+            return response.json();
+          }
+          throw new Error('통신실패');
+        })
+        .then(data => {
+          if (data.message === 'INVALID_PASSWORD') {
+            alert('비밀번호를 확인해 주세요.');
+          } else {
+            localStorage.setItem('token', data.accessToken);
+            navigate('/');
+          }
+        });
+    }
   };
 
   return (
@@ -50,29 +61,43 @@ const Login = () => {
           비밀번호를 잊으셨나요
         </Link>
         <form className="loginBox" onSubmit={handleOnsubmit}>
-          <div className="inputBox">
+          <div
+            className={`inputBox ${
+              emailRegex.test(userInfoValue.email) ? 'validationInputBox' : ''
+            }`}
+          >
             <input
-              className="input emailInput"
+              className="input"
               type="email"
               name="email"
               placeholder="이메일 *"
               value={userInfoValue.email}
               onChange={onChangeUserInfoValue}
+              required
             />
             <span className="alert">
-              사용가능한 이메일 주소를 사용해 주세요
+              {emailRegex.test(userInfoValue.email)
+                ? ''
+                : '이메일 주소가 유효하지 않습니다'}
             </span>
           </div>
-          <div className="inputBox">
+          <div
+            className={`inputBox ${
+              userInfoValue.pw ? 'validationInputBox' : ''
+            }`}
+          >
             <input
-              className="input pwInput"
+              className="input"
               type="password"
               name="pw"
               placeholder="비밀번호 *"
               value={userInfoValue.pw}
               onChange={onChangeUserInfoValue}
+              required
             />
-            <span className="alert">패스워드를 입력하세요</span>
+            <span className="alert">
+              {userInfoValue.pw ? '' : '패스워드를 입력하세요'}
+            </span>
           </div>
 
           <Button>
