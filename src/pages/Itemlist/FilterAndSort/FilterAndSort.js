@@ -2,33 +2,35 @@ import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import './FilterAndSort.scss';
 
-const FilterAndSort = ({ setIsFilter }) => {
+const FilterAndSort = ({ setIsFilter, sortReset, clickSort }) => {
   const [isSelected, setIsSelected] = useState({
-    latest: false,
-    lowprice: false,
-    highprice: false,
-    size: false,
+    new: false,
+    low: false,
+    high: false,
   });
+
+  const clickReset = () => {
+    setIsSelected({
+      new: false,
+      low: false,
+      high: false,
+    });
+    sortReset();
+  };
 
   const handleSelected = event => {
     const { name } = event.target;
     setIsSelected({
-      ...isSelected,
+      new: false,
+      low: false,
+      high: false,
       [name]: !isSelected[name],
     });
+    clickSort([name], isSelected[event.target.name]);
   };
 
   const clickClose = () => {
     setIsFilter(false);
-  };
-
-  const clickReset = () => {
-    setIsSelected({
-      latest: false,
-      lowprice: false,
-      highprice: false,
-      size: false,
-    });
   };
 
   return (
@@ -36,53 +38,56 @@ const FilterAndSort = ({ setIsFilter }) => {
       <div className="filterAndSortHeader">
         <span>Filter & Sort</span>
         <div className="filterAndSortBtnBox">
-          <button className="filterAndSortReset" onClick={clickReset}>
+          <button
+            className="filterAndSortReset"
+            onClick={() => {
+              clickReset();
+            }}
+          >
             모두지우기
           </button>
           <AiOutlineClose onClick={clickClose} className="filterAndSortClose" />
         </div>
       </div>
-      <ul>
+      <form
+        onClick={e => {
+          e.preventDefault();
+        }}
+      >
         <button
           className={`filterAndSortList ${
-            isSelected.latest ? 'selected' : 'bordernone'
+            isSelected.new ? 'selected' : 'bordernone'
           }`}
-          onClick={handleSelected}
-          name="latest"
+          onClick={e => {
+            handleSelected(e);
+          }}
+          name="new"
         >
           최근 순
         </button>
         <button
           className={`filterAndSortList ${
-            isSelected.lowprice ? 'selected' : 'bordernone'
+            isSelected.low ? 'selected' : 'bordernone'
           }`}
-          onClick={handleSelected}
-          name="lowprice"
+          onClick={e => {
+            handleSelected(e);
+          }}
+          name="low"
         >
           가격 낮은 순
         </button>
         <button
-          href="#"
           className={`filterAndSortList ${
-            isSelected.highprice ? 'selected' : 'bordernone'
+            isSelected.high ? 'selected' : 'bordernone'
           }`}
-          onClick={handleSelected}
-          name="highprice"
+          onClick={e => {
+            handleSelected(e);
+          }}
+          name="high"
         >
           가격 높은 순
         </button>
-        <button
-          href="#"
-          className={`filterAndSortList ${
-            isSelected.size ? 'selected' : 'bordernone'
-          }`}
-          onClick={handleSelected}
-          name="size"
-        >
-          사이즈
-        </button>
-        <input type="checkbox" />
-      </ul>
+      </form>
     </div>
   );
 };

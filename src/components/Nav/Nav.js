@@ -98,13 +98,13 @@ const Nav = () => {
                 </form>
               </div>
               <div className="iconWrapper">
-                <Link to="/signup">
+                <Link to="/login">
                   <BiUser className="iconUser" />
                 </Link>
                 <Link to="/wishlist">
                   <BiHeart className="iconHeart" />
                 </Link>
-                <Link to="/shoppingbag">
+                <Link to="/cart">
                   <RiShoppingBagLine className="iconBag" />
                 </Link>
               </div>
@@ -127,7 +127,7 @@ const Nav = () => {
                       {data.shoes.name}
                     </Link>
                     {data.shoesCategory.map(el => (
-                      <Link>{el}</Link>
+                      <Link to={el.url}>{el.name}</Link>
                     ))}
                   </div>
                 ))}
@@ -139,7 +139,7 @@ const Nav = () => {
                 .filter(mockDataFetch =>
                   mockDataFetch.shoes.name.includes('남성')
                 )
-                .map(data => (
+                .map((data, idx) => (
                   <Link key={data.id} className={data.id} to={data.shoes.url}>
                     {data.shoes.name}
                   </Link>
@@ -163,7 +163,7 @@ const Nav = () => {
                       {data.shoes.name}
                     </Link>
                     {data.shoesCategory.map(el => (
-                      <Link>{el}</Link>
+                      <Link to={el.url}>{el.name}</Link>
                     ))}
                   </div>
                 ))}
