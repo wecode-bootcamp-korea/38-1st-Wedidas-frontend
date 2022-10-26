@@ -30,22 +30,15 @@ const Itemdetail = () => {
   const saveSize = event => {
     setProductSize(event.target.value);
   };
-
-  useEffect(() => {
-    fetch('/data/itemditto.json')
-      .then(data => data.json())
-      .then(data => setProductDetail(data.data));
-  }, []);
-
   const tokenAuthorization = localStorage.getItem(
     `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`
   );
 
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.160:3000/products/${productId}`)
-  //     .then(data => data.json())
-  //     .then(data => setProductDetail(data.data));
-  // }, [productId]);
+  useEffect(() => {
+    fetch(`http://10.58.52.160:3000/products/${productId}`)
+      .then(data => data.json())
+      .then(data => setProductDetail(data.data));
+  }, [productId]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
