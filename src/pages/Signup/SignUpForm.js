@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignUpForm.scss';
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -38,7 +40,16 @@ const SignUpForm = () => {
           phoneNumber: userInfo.phone_number,
           point: 300000,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message == 'FAILED') {
+            alert('이미 가입한 메일입니다.');
+          } else {
+            alert('회원가입이 완료되었습니다.');
+            navigate('/login');
+          }
+        });
     } else {
       alert('양식을 다시 확인해 주세요');
     }
