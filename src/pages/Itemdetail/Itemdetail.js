@@ -35,10 +35,16 @@ const Itemdetail = () => {
   );
 
   useEffect(() => {
-    fetch(`http://10.58.52.160:3000/products/${productId}`)
+    fetch('/data/itemditto.json')
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
-  }, [productId]);
+  }, []);
+
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.160:3000/products/${productId}`)
+  //     .then(data => data.json())
+  //     .then(data => setProductDetail(data.data));
+  // }, [productId]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
