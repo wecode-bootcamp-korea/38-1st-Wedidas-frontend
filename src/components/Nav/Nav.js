@@ -5,10 +5,13 @@ import { BiUser, BiHeart } from 'react-icons/bi';
 import { RiShoppingBagLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import './Nav.scss';
+import MIDNAVBAR_LINKER from './NavSD';
 
 const Nav = () => {
   const [search, setSearch] = useState('');
   const [mockDataFetch, setMockDataFetch] = useState([]);
+  const [wishlistFetch, setWishlistFetch] = useState([]);
+  // const wishlistProductsCount = wishlistFetch.count();
 
   const onSearch = event => {
     event.preventDefault();
@@ -24,6 +27,12 @@ const Nav = () => {
         setMockDataFetch(data);
       });
   }, []);
+
+  // useEffect(() => {
+  //   fetch('')
+  //     .then(res => res.json())
+  //     .then(data => setWishlistFetch(data));
+  // });
 
   const [menShown, setMenShown] = useState(false);
   const [womenShown, setWomenShown] = useState(false);
@@ -41,18 +50,11 @@ const Nav = () => {
           </div>
           <div className="middleNavBox">
             <div className="assistSection">
-              <Link className="link" to="/help">
-                도움말
-              </Link>
-              <Link className="link" to="/refund">
-                반품
-              </Link>
-              <Link className="link" to="/orders">
-                주문조회
-              </Link>
-              <Link className="link" to="/signup">
-                아디클럽 가입하기
-              </Link>
+              {MIDNAVBAR_LINKER.map(el => (
+                <Link key={el.id} className="link" to={el.url}>
+                  {el.content}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="lowerNavBox">
@@ -107,6 +109,9 @@ const Nav = () => {
                 <Link to="/cart">
                   <RiShoppingBagLine className="iconBag" />
                 </Link>
+                {/* {wishlistFetch.userId === userid ? 
+                <p className='numbersofItemsinCart'>{wishlistFetch.userId.total{wishlistFetch.userId.total > 0 ? wishlistFetch.userId.total : null}}</p>
+              : null }  */}
               </div>
             </div>
           </div>
