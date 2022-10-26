@@ -6,7 +6,7 @@ import { BiRuler } from 'react-icons/bi';
 import { TbHeading, TbTruckDelivery } from 'react-icons/tb';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { AiOutlineCheckCircle, AiOutlineCheck } from 'react-icons/ai';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { HiHome, HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { FaRegHeart } from 'react-icons/fa';
 import './Itemdetail.scss';
 
@@ -19,15 +19,13 @@ const Itemdetail = () => {
   const params = useParams();
   const productId = params.id;
 
-  console.log(productSize);
-  console.log(productDetail);
-
   const toggleMenu = () => {
     setReadmore(readmore => !readmore);
   };
 
-  const toggleActive = e => {
-    setButtonToggle(prev => !prev);
+  const toggleActive = () => {
+    setButtonToggle(!buttonToggle);
+    console.log('asd');
   };
 
   const saveSize = event => {
@@ -35,17 +33,30 @@ const Itemdetail = () => {
   };
 
   useEffect(() => {
+    console.log('working');
     fetch('/data/itemditto.json')
       .then(data => data.json())
-      .then(data => setProductDetail(data));
+      .then(data => setProductDetail(data.data));
   }, []);
+
+  const tokenAuthorization = localStorage.getItem(
+    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`
+  );
+
+  console.log(productDetail);
+
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.160:3000/products/${productId}`)
+  //     .then(data => data.json())
+  //     .then(data => setProductDetail(data));
+  // }, [productId]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`,
+        authorization: tokenAuthorization,
       },
       body: JSON.stringify({
         productId: productDetail.id,
@@ -70,7 +81,7 @@ const Itemdetail = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`,
+        authorization: tokenAuthorization,
       },
       body: JSON.stringify({
         productId: productDetail.id,
@@ -117,7 +128,7 @@ const Itemdetail = () => {
             </span>
           </button>
           <button>
-            <span>정보</span>{' '}
+            <span>productDetail.data.description</span>{' '}
             <span>
               <IoIosArrowDown />
             </span>
@@ -151,15 +162,11 @@ const Itemdetail = () => {
             </span>
           </Link>
         </div>
-        <span className="categoryInnerLink">
-          <Link to="/">Home</Link>
-        </span>
-        <span className="categoryInnerLink">
-          <Link to="/originals">Originals</Link>
-        </span>
-        <span className="categoryInnerLink">
-          <Link to="/shoes">Shoes</Link>
-        </span>
+        {LINK_COMPONENT.map(el => (
+          <span key={el} className="categoryInnerLink">
+            <Link to={el.link}>{el.name}</Link>
+          </span>
+        ))}
       </div>
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
@@ -170,33 +177,26 @@ const Itemdetail = () => {
           <div className="titlePriceColor">
             <p className="productName">{productDetail.name}</p>
             <p className="price"> {productDetail.price}</p>
-            <p className="availableColors"> 컬러</p>
+            <p className="availableColors"> 블루/ 레드/ 블랙</p>
           </div>
         </div>
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
-            {/* {productDetail.size.map(el => (
-              <button className="sizeButton" onClick={saveSize}>
-                {el}
-              </button>
-            ))} */}
-            <button
-              className={!buttonToggle ? 'sizeButton' : 'darkSizeButton'}
-              value="2"
-              onClick={() => {
-                saveSize();
-                toggleActive();
-              }}
-            >
-              250
-            </button>
-            <button className="sizeButton" value="3" onClick={saveSize}>
-              260
-            </button>
-            <button className="sizeButton" value="4" onClick={saveSize}>
-              270
-            </button>
+            {productDetail.stocksize
+              .filter(data => data.stock > 0)
+              .map(el => (
+                <button
+                  key={el.size}
+                  className="sizeButton"
+                  onClick={e => {
+                    saveSize(e);
+                    toggleActive();
+                  }}
+                >
+                  {el.size}
+                </button>
+              ))}
           </div>
           <div className="sizeGuide">
             <span className="rulerIcon">
@@ -207,10 +207,10 @@ const Itemdetail = () => {
         </div>
         <div className="rightLowerButtonList">
           <div className="firstButtonRow">
-            <button className="shoppingBagButton" onClick={sendtoCart}>
-              <span>장바구니 담기</span>{' '}
+            <button className="btn shoppingBagButton" onClick={sendtoCart}>
+              <span>장바구니 담기</span>
               <span>
-                <HiOutlineArrowNarrowRight />{' '}
+                <HiOutlineArrowNarrowRight />
               </span>
             </button>
             <button className="heartButton" onClick={sendtoWishlist}>
@@ -255,3 +255,21 @@ const Itemdetail = () => {
 };
 
 export default Itemdetail;
+
+const LINK_COMPONENT = [
+  {
+    id: 1,
+    name: 'Home',
+    link: '/',
+  },
+  {
+    id: 2,
+    name: 'Originals',
+    link: '/originals',
+  },
+  {
+    id: 3,
+    name: 'Shoes',
+    link: '/shoes',
+  },
+];
