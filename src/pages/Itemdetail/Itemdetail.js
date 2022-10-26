@@ -25,7 +25,6 @@ const Itemdetail = () => {
 
   const toggleActive = () => {
     setButtonToggle(!buttonToggle);
-    console.log('asd');
   };
 
   const saveSize = event => {
@@ -33,7 +32,6 @@ const Itemdetail = () => {
   };
 
   useEffect(() => {
-    console.log('working');
     fetch('/data/itemditto.json')
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
@@ -184,7 +182,7 @@ const Itemdetail = () => {
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
             {productDetail.stocksize
-              .filter(data => data.stock > 0)
+              ?.filter(data => data.stock > 0)
               .map(el => (
                 <button
                   key={el.size}
