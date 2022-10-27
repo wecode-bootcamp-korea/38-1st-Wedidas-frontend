@@ -67,7 +67,7 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
     )
       .then(res => res.json())
       .then(data => {
-        if (data.message == 'FAILED') {
+        if (data.message === 'FAILED') {
           alert('재고가 없습니다.');
         }
         window.location.reload();
