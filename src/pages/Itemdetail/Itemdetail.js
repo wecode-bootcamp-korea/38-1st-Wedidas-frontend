@@ -17,6 +17,7 @@ const Itemdetail = () => {
   const [readmore, setReadmore] = useState(false);
   const [buttonToggle, setButtonToggle] = useState('');
   const { id } = useParams;
+
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -38,16 +39,10 @@ const Itemdetail = () => {
   const tokenAuthorization = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('/data/itemditto.json')
+    fetch(`http://10.58.52.160:3000/products/${id}`)
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
-  }, []);
-
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.160:3000/products/${id}`)
-  //     .then(data => data.json())
-  //     .then(data => setProductDetail(data.data));
-  // }, [id]);
+  }, [id]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
@@ -57,7 +52,7 @@ const Itemdetail = () => {
         authorization: tokenAuthorization,
       },
       body: JSON.stringify({
-        productId: productDetail[0].id,
+        productId: productDetail[{ id }].id,
         sizeId: productSize,
       }),
     })
@@ -82,7 +77,7 @@ const Itemdetail = () => {
         authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjQsImlhdCI6MTY2Njc4MjkzNywiZXhwIjoxNjY3NTYwNTM3fQ.CGpu7WbYq1-BGBX47SZG-jLkqeQgge-eYVCTbqdgJvI`,
       },
       body: JSON.stringify({
-        productId: productDetail[0]?.id,
+        productId: productDetail[{ id }]?.id,
       }),
     });
   };
@@ -93,22 +88,21 @@ const Itemdetail = () => {
         <div className="imageList">
           <img
             className="productThumbnail"
-            src={productDetail[0]?.thumbnailUrl}
+            src={productDetail[{ id }]?.thumbnailUrl}
             alt="mainimage"
           />
-          {readmore
-            ? productDetail[0]?.images.map(el => (
-                <img
-                  className="additionalThumbnail"
-                  key={el}
-                  src={el}
-                  alt="additionalimage"
-                />
-              ))
-            : null}
+          {readmore &&
+            productDetail[{ id }]?.images.map(el => (
+              <img
+                className="additionalThumbnail"
+                key={el}
+                src={el}
+                alt="additionalimage"
+              />
+            ))}
           <button
             className={!readmore ? 'showMoreButton' : 'hideMoreButton'}
-            onClick={() => toggleMenu()}
+            onClick={toggleMenu}
           >
             <span>{!readmore ? 'SHOW MORE' : 'SHOW LESS'}</span>
             {!readmore ? (
@@ -161,7 +155,7 @@ const Itemdetail = () => {
           </Link>
         </div>
         {LINK_COMPONENT.map(el => (
-          <span key={el} className="categoryInnerLink">
+          <span key={el.id} className="categoryInnerLink">
             <Link to={el.link}>{el.name}</Link>
           </span>
         ))}
@@ -169,13 +163,13 @@ const Itemdetail = () => {
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
           <div className="categoryAndReview">
-            <p>{productDetail[0]?.category}</p>
+            <p>{productDetail[{ id }]?.category}</p>
             <p>★★★★★</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">{productDetail[0]?.name}</p>
+            <p className="productName">{productDetail[{ id }]?.name}</p>
             <p className="price">
-              {priceToString(Math.round(productDetail[0]?.price))}
+              {priceToString(Math.round(productDetail[{ id }]?.price))}
             </p>
             <p className="availableColors"> 블루/ 레드/ 블랙</p>
           </div>
@@ -183,11 +177,11 @@ const Itemdetail = () => {
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
-            {productDetail[0]?.stocksize
+            {productDetail[{ id }]?.stocksize
               ?.filter(data => data.stock > 0)
               .map((item, idx) => (
                 <button
-                  value={(idx = idx + 1)}
+                  value={item.id}
                   key={item.footSize}
                   className={
                     'sizeButton' + (idx == buttonToggle ? 'active' : '')
