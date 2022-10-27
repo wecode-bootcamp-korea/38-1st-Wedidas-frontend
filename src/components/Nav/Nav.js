@@ -4,14 +4,15 @@ import { SlMagnifier } from 'react-icons/sl';
 import { BiUser, BiHeart } from 'react-icons/bi';
 import { RiShoppingBagLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import './Nav.scss';
+import { api } from '../../config';
 import MIDNAVBAR_LINKER from './NavSD';
+import './Nav.scss';
 
 const Nav = () => {
   const [search, setSearch] = useState('');
   const [mockDataFetch, setMockDataFetch] = useState([]);
   const [wishlistFetch, setWishlistFetch] = useState([]);
-  // const wishlistProductsCount = wishlistFetch.count();
+  const [cartlistFetch, setCartlistFetch] = useState([]);
 
   const onSearch = event => {
     event.preventDefault();
@@ -28,14 +29,34 @@ const Nav = () => {
       });
   }, []);
 
-  // useEffect(() => {
-  //   fetch('')
-  //     .then(res => res.json())
-  //     .then(data => setWishlistFetch(data));
-  // });
+  useEffect(() => {
+    fetch(`${api.wishlists}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => setWishlistFetch(data.wishlists.length));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://10.58.52.78:3000/carts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => setCartlistFetch(data.wishlists.length));
+  }, []);
 
   const [menShown, setMenShown] = useState(false);
   const [womenShown, setWomenShown] = useState(false);
+
+  console.log(wishlistFetch);
 
   return (
     <div className="navComponent">
@@ -112,12 +133,12 @@ const Nav = () => {
               </div>
             </div>
           </div>
-          {/* {wishlistFetch.userId === userid ? (
-                  <p className="numbersofItemsinCart">
-                    {wishlistFetch.userId.total ?? null}
-                  </p>
-                ) : null} */}
-          <p className="numberofItemsinCart">1</p>
+          {wishlistFetch === !undefined ? (
+            <p className="numberofItemsinWishlist">{wishlistFetch}</p>
+          ) : null}
+          {cartlistFetch === !undefined ? (
+            <p className="numberofItemsinCart">{cartlistFetch}</p>
+          ) : null}
         </div>
       </nav>
       <div className="hoverWholeBox">
@@ -171,7 +192,9 @@ const Nav = () => {
                       {data.shoes.name}
                     </Link>
                     {data.shoesCategory.map(el => (
-                      <Link to={el.url}>{el.name}</Link>
+                      <Link key={el} to={el.url}>
+                        {el.name}
+                      </Link>
                     ))}
                   </div>
                 ))}
