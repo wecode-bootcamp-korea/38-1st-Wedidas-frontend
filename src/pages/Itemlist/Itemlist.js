@@ -15,10 +15,11 @@ const Itemlist = () => {
   const offset = searchParams.get('offset');
   const limit = searchParams.get('limit');
   const sort = searchParams.get('sort');
+  const category = searchParams.get('category');
 
   useEffect(() => {
     fetch(
-      `${api.products}/${params.gender}/${params.category}?sort=${sort}&offset=${offset}&limit=${limit}`,
+      `${api.products}/${params.gender}?category=${category}&sort=${sort}&offset=${offset}&limit=${limit}`,
       {
         method: 'GET',
         headers: { 'content-type': 'application/json' },
@@ -26,7 +27,7 @@ const Itemlist = () => {
     )
       .then(res => res.json())
       .then(res => setShoesData(res.data));
-  }, [params.gender, params.category, limit, offset, sort]);
+  }, [params.gender, category, limit, offset, sort]);
 
   const handleWindow = e => {
     const clicked = e.target.closest('.filterAndSort');
@@ -46,11 +47,16 @@ const Itemlist = () => {
   };
 
   const clickSort = isSelected => {
-    setSearchParams({ sort: isSelected, offset: 0, limit: EIGHT });
+    setSearchParams({
+      category: '',
+      sort: isSelected,
+      offset: 0,
+      limit: EIGHT,
+    });
   };
 
   const sortReset = () => {
-    setSearchParams({ sort: '', offset: 0, limit: EIGHT });
+    setSearchParams({ category: '', sort: '', offset: 0, limit: EIGHT });
   };
   return (
     <div className="itemList" onClick={handleWindow}>
