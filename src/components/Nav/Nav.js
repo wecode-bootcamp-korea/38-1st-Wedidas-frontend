@@ -4,11 +4,17 @@ import { SlMagnifier } from 'react-icons/sl';
 import { BiUser, BiHeart } from 'react-icons/bi';
 import { RiShoppingBagLine } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { api } from '../../config';
+import MIDNAVBAR_LINKER from './NavSD';
 import './Nav.scss';
 
 const Nav = () => {
   const [search, setSearch] = useState('');
   const [mockDataFetch, setMockDataFetch] = useState([]);
+  const [wishlistFetch, setWishlistFetch] = useState([]);
+  const [cartlistFetch, setCartlistFetch] = useState([]);
+  const [menShown, setMenShown] = useState(false);
+  const [womenShown, setWomenShown] = useState(false);
 
   const onSearch = event => {
     event.preventDefault();
@@ -25,8 +31,29 @@ const Nav = () => {
       });
   }, []);
 
-  const [menShown, setMenShown] = useState(false);
-  const [womenShown, setWomenShown] = useState(false);
+  useEffect(() => {
+    fetch(`${api.wishlists}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => setWishlistFetch(data.wishlists.length));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://10.58.52.78:3000/carts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => setCartlistFetch(data.wishlists.length));
+  }, []);
 
   return (
     <div className="navComponent">
@@ -41,18 +68,11 @@ const Nav = () => {
           </div>
           <div className="middleNavBox">
             <div className="assistSection">
-              <Link className="link" to="/help">
-                도움말
-              </Link>
-              <Link className="link" to="/refund">
-                반품
-              </Link>
-              <Link className="link" to="/orders">
-                주문조회
-              </Link>
-              <Link className="link" to="/signup">
-                아디클럽 가입하기
-              </Link>
+              {MIDNAVBAR_LINKER.map(el => (
+                <Link key={el.id} className="link" to={el.url}>
+                  {el.content}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="lowerNavBox">
@@ -110,6 +130,12 @@ const Nav = () => {
               </div>
             </div>
           </div>
+          {wishlistFetch === !undefined ? (
+            <p className="numberofItemsinWishlist">{wishlistFetch}</p>
+          ) : null}
+          {cartlistFetch === !undefined ? (
+            <p className="numberofItemsinCart">{cartlistFetch}</p>
+          ) : null}
         </div>
       </nav>
       <div className="hoverWholeBox">
@@ -163,7 +189,9 @@ const Nav = () => {
                       {data.shoes.name}
                     </Link>
                     {data.shoesCategory.map(el => (
-                      <Link to={el.url}>{el.name}</Link>
+                      <Link key={el} to={el.url}>
+                        {el.name}
+                      </Link>
                     ))}
                   </div>
                 ))}
