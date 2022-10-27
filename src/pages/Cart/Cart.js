@@ -26,7 +26,8 @@ const Cart = () => {
   let initialPrice = 0;
 
   const sumTotalPrice = cartItem?.reduce(
-    (prev, current) => prev + parseInt(current.price) * parseInt(current.count),
+    (prev, current) =>
+      prev + parseInt(current.price) * parseInt(current.quantity),
     initialPrice
   );
 

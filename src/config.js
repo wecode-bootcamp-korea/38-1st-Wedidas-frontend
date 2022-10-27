@@ -1,4 +1,4 @@
-export const BASE_URL_SI = 'http://10.58.52.247:3000';
+export const BASE_URL_SI = 'http://10.58.52.78:3000';
 export const BASE_URL_DY = 'http://10.58.52.108:3000';
 
 export const api = {

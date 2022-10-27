@@ -7,7 +7,7 @@ import './CartItem.scss';
 
 const CartItem = ({ data, priceToString, deleteCartItem }) => {
   const [isSelect, setIsSelect] = useState(false);
-  const [numberOfShoe, setNumberOfShoe] = useState(data.count);
+  const [numberOfShoe, setNumberOfShoe] = useState(data.quantity);
 
   const numberOfShoeClick = e => {
     const count = e.target.value;
@@ -56,7 +56,7 @@ const CartItem = ({ data, priceToString, deleteCartItem }) => {
 
   const changeStock = count => {
     fetch(
-      `${api.carts}?cartId=${data.cartId}&count=${count}&stock=${data.stock}`,
+      `${api.carts}?cartId=${data.cartId}&quantity=${count}&stock=${data.stock}`,
       {
         method: 'PATCH',
         headers: {
