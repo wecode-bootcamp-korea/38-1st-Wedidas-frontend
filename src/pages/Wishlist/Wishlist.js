@@ -8,18 +8,18 @@ import './Wishlist.scss';
 const Wishlist = () => {
   const [wishItemList, setWishItemList] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(`${api.wishlists}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       authorization: localStorage.getItem('token'),
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setWishItemList(data.wishlists);
-  //     });
-  // }, [wishItemList]);
+  useEffect(() => {
+    fetch(`${api.wishlists}`, {
+      method: 'GET',
+      headers: {
+        authorization: localStorage.getItem('token'),
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setWishItemList(data.wishlists);
+      });
+  }, [wishItemList]);
 
   const onRemove = id => {
     setWishItemList(wishItemList.filter(item => item.productId !== id));
