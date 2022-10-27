@@ -220,13 +220,7 @@
       background-color: white;
     }
 
-    .sizeButtonList :hover {
-      background-color: black;
-      color: white;
-      cursor: pointer;
-    }
-
-    .darkSizeButton {
+    .sizeButtonactive {
       background-color: black;
       color: white;
       cursor: pointer;
@@ -235,6 +229,12 @@
       outline: none;
       border: 1px solid #eceff1;
       font-weight: bolder;
+    }
+
+    .sizeButtonList :hover {
+      background-color: black;
+      color: white;
+      cursor: pointer;
     }
 
     .sizeGuide {

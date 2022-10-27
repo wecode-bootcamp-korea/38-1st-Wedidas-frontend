@@ -15,36 +15,34 @@ const Itemdetail = () => {
   const [productDetail, setProductDetail] = useState([]);
   const [productSize, setProductSize] = useState('');
   const [readmore, setReadmore] = useState(false);
-  const [buttonToggle, setButtonToggle] = useState(false);
+  const [buttonToggle, setButtonToggle] = useState('');
   const params = useParams();
   const productId = params.id;
+  const priceToString = price => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   const toggleMenu = () => {
     setReadmore(readmore => !readmore);
   };
 
-  const toggleActive = () => {
-    setButtonToggle(!buttonToggle);
+  const toggleActive = e => {
+    setButtonToggle(prev => {
+      return e.target.value;
+    });
   };
 
   const saveSize = event => {
     setProductSize(event.target.value);
   };
-  const tokenAuthorization = localStorage.getItem(
-    `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImlhdCI6MTY2NjMyODA5OCwiZXhwIjoxNjY3MTA1Njk4fQ._Y51MRM-wuYWK6dGz2yuGVpccGFT-9MD6RJFQhssi2o`
-  );
+
+  const tokenAuthorization = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch('/data/itemditto.json')
+    fetch(`http://10.58.52.160:3000/products/${productId}`)
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
-  }, []);
-
-  // useEffect(() => {
-  //   fetch(`http://10.58.52.160:3000/products/${productId}`)
-  //     .then(data => data.json())
-  //     .then(data => setProductDetail(data.data));
-  // }, [productId]);
+  }, [productId]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
@@ -54,7 +52,7 @@ const Itemdetail = () => {
         authorization: tokenAuthorization,
       },
       body: JSON.stringify({
-        productId: productDetail.id,
+        productId: productDetail[0].id,
         sizeId: productSize,
       }),
     })
@@ -79,7 +77,7 @@ const Itemdetail = () => {
         authorization: tokenAuthorization,
       },
       body: JSON.stringify({
-        productId: productDetail.id,
+        productId: productDetail[0].id,
       }),
     });
   };
@@ -90,11 +88,11 @@ const Itemdetail = () => {
         <div className="imageList">
           <img
             className="productThumbnail"
-            src={productDetail.thumbnail}
+            src={productDetail[0].thumbnailUrl}
             alt="mainimage"
           />
           {readmore
-            ? productDetail.imageUrl.map(el => (
+            ? productDetail[0].images.map(el => (
                 <img
                   className="additionalThumbnail"
                   key={el}
@@ -166,30 +164,36 @@ const Itemdetail = () => {
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
           <div className="categoryAndReview">
-            <p>{productDetail.category}</p>
-            <p>review (임시)</p>
+            <p>{productDetail[0].category}</p>
+            <p>★★★★★</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">{productDetail.name}</p>
-            <p className="price"> {productDetail.price}</p>
+            <p className="productName">{productDetail[0].name}</p>
+            <p className="price">
+              {' '}
+              {priceToString(Math.round(productDetail[0].price))}
+            </p>
             <p className="availableColors"> 블루/ 레드/ 블랙</p>
           </div>
         </div>
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
-            {productDetail.stocksize
+            {productDetail[0].stocksize
               ?.filter(data => data.stock > 0)
-              .map(el => (
+              .map((item, idx) => (
                 <button
-                  key={el.size}
-                  className="sizeButton"
+                  value={(idx = idx + 1)}
+                  key={item.footSize}
+                  className={
+                    'sizeButton' + (idx == buttonToggle ? 'active' : '')
+                  }
                   onClick={e => {
                     saveSize(e);
-                    toggleActive();
+                    toggleActive(e);
                   }}
                 >
-                  {el.size}
+                  {item.footSize}
                 </button>
               ))}
           </div>
