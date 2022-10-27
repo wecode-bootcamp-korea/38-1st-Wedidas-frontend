@@ -99,4 +99,4 @@ const Itemlist = () => {
 };
 export default Itemlist;
 
-const PAGE_NUMBER = [1, 2, 3];
+const PAGE_NUMBER = [1, 2];
