@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { api } from '../../config';
 import './SignUpForm.scss';
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: '',
     password: '',
@@ -27,7 +30,7 @@ const SignUpForm = () => {
       emailRegex.test(userInfo.email) &&
       passwordRegex.test(userInfo.password)
     ) {
-      fetch('http://10.58.52.133:3000/users/signup', {
+      fetch(`${api.signup}`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
@@ -38,7 +41,16 @@ const SignUpForm = () => {
           phoneNumber: userInfo.phone_number,
           point: 300000,
         }),
-      });
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.message == 'FAILED') {
+            alert('이미 가입한 메일입니다.');
+          } else {
+            alert('회원가입이 완료되었습니다.');
+            navigate('/login');
+          }
+        });
     } else {
       alert('양식을 다시 확인해 주세요');
     }

@@ -126,6 +126,36 @@
   }
 }
 
+.numberofItemsinWishlist {
+  position: absolute;
+  right: 80px;
+  top: 58px;
+  width: 22px;
+  height: 22px;
+  line-height: 19px;
+  background-color: #2c80b6;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+.numberofItemsinCart {
+  position: absolute;
+  right: 40px;
+  top: 58px;
+  width: 22px;
+  height: 22px;
+  line-height: 19px;
+  background-color: #2c80b6;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
 .hoverWholeBox {
   display: flex;
   flex-direction: column;

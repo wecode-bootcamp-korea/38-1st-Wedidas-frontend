@@ -4,20 +4,20 @@
     "gender": "남성",
     "shoes": {
       "name": "신발",
-      "url": "/itemlist/men/all?sort=&offset=0&limit=8"
+      "url": "/itemlist/men?category=all&sort=&offset=0&limit=8"
     },
     "shoesCategory": [
       {
         "name": "오리지널스",
-        "url": "/itemlist/men/originals"
+        "url": "/itemlist/men?category=originals&sort=&offset=0&limit=8"
       },
       {
         "name": "슬리퍼",
-        "url": "/itemlist/men/slipper"
+        "url": "/itemlist/men?category=slipper&sort=&offset=0&limit=8"
       },
       {
         "name": "사커",
-        "url": "/itemlist/men/soccer"
+        "url": "/itemlist/men?category=soccer&sort=&offset=0&limit=8"
       }
     ],
     "classname": "mshoes"
@@ -97,20 +97,20 @@
     "gender": "여성",
     "shoes": {
       "name": "신발",
-      "url": "/itemlist/women/all?sort=&offset=0&limit=8"
+      "url": "/itemlist/women?category=all&sort=&offset=0&limit=8"
     },
     "shoesCategory": [
       {
         "name": "오리지널스",
-        "url": "/itemlist/women/originals"
+        "url": "/itemlist/women?category=originals&sort=&offset=0&limit=8"
       },
       {
         "name": "슬리퍼",
-        "url": "/itemlist/women/slipper"
+        "url": "/itemlist/women?category=slipper&sort=&offset=0&limit=8"
       },
       {
         "name": "사커",
-        "url": "/itemlist/women/soccer"
+        "url": "/itemlist/women?category=soccer&sort=&offset=0&limit=8"
       }
     ],
     "classname": "mshoes"
@@ -185,14 +185,14 @@
     "id": 9,
     "shoes": {
       "name": "남성 전체보기",
-      "url": "/itemlist/men/all?offset=0&limit=8"
+      "url": "/itemlist/men?category=all&sort=&offset=0&limit=8"
     }
   },
   {
     "id": 10,
     "shoes": {
       "name": "남성신발 전체보기",
-      "url": "/itemlist/men/all?offset=0&limit=8"
+      "url": "/itemlist/men?category=all&sort=&offset=0&limit=8"
     }
   },
   {
@@ -221,14 +221,14 @@
     "id": 14,
     "shoes": {
       "name": "여성 전체보기",
-      "url": "/itemlist/women/all?offest=0&limit=8"
+      "url": "/itemlist/women?category=all&sort=&offset=0&limit=8"
     }
   },
   {
     "id": 15,
     "shoes": {
       "name": "여성신발 전체보기",
-      "url": "/itemlist/women/all?offest=0&limit=8"
+      "url": "/itemlist/women?category=all&sort=&offset=0&limit=8"
     }
   },
   {

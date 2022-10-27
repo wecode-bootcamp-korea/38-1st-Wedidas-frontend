@@ -112,8 +112,8 @@
     "categoryname": "남성 Originals"
   },
   {
-    "id": 17,
-    "thumbnail": "https://images.unsplash.com/photo-1659785568869-aa061a0f8e87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
+    "productId": 17,
+    "thumbnailUrl": "https://images.unsplash.com/photo-1659785568869-aa061a0f8e87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
     "name": "wedidas3",
     "price": "59,000",
     "categoryname": "남성 Running"

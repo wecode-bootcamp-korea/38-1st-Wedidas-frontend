@@ -32,7 +32,7 @@ const WishProduct = ({ data, onRemove }) => {
             src={data.thumbnailUrl}
             alt="신발사진"
           />
-          <p className="itemPrice">{priceToString(data.price)}</p>
+          <p className="itemPrice">{priceToString(parseInt(data.price))}</p>
         </div>
         <div className="itemTextBox">
           <p className="itemName">{data.name}</p>
