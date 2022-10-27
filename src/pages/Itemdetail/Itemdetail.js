@@ -16,8 +16,7 @@ const Itemdetail = () => {
   const [productSize, setProductSize] = useState('');
   const [readmore, setReadmore] = useState(false);
   const [buttonToggle, setButtonToggle] = useState('');
-  const params = useParams();
-  const productId = params.id;
+  const { id } = useParams;
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -39,10 +38,10 @@ const Itemdetail = () => {
   const tokenAuthorization = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.160:3000/products/${productId}`)
+    fetch(`http://10.58.52.160:3000/products/${id}`)
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
-  }, [productId]);
+  }, [id]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
@@ -88,11 +87,11 @@ const Itemdetail = () => {
         <div className="imageList">
           <img
             className="productThumbnail"
-            src={productDetail[0].thumbnailUrl}
+            src={productDetail.thumbnailUrl}
             alt="mainimage"
           />
           {readmore
-            ? productDetail[0].images.map(el => (
+            ? productDetail.images.map(el => (
                 <img
                   className="additionalThumbnail"
                   key={el}
@@ -115,31 +114,31 @@ const Itemdetail = () => {
         </div>
         <div className="buttonList">
           <button className="highlightButton">
-            <span>하이라이트</span>{' '}
+            <span>하이라이트</span>
             <span>
               <IoIosArrowDown />
             </span>
           </button>
           <button>
-            <span>정보</span>{' '}
+            <span>정보</span>
             <span>
               <IoIosArrowDown />
             </span>
           </button>
           <button>
-            <span>세부정보</span>{' '}
+            <span>세부정보</span>
             <span>
               <IoIosArrowDown />
             </span>
           </button>
           <button>
-            <span>스타일 방법</span>{' '}
+            <span>스타일 방법</span>
             <span>
               <IoIosArrowDown />
             </span>
           </button>
           <button className="reviewbutton">
-            <span>리뷰</span>{' '}
+            <span>리뷰</span>
             <span>
               <IoIosArrowDown />
             </span>
@@ -164,14 +163,13 @@ const Itemdetail = () => {
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
           <div className="categoryAndReview">
-            <p>{productDetail[0].category}</p>
+            <p>{productDetail.category}</p>
             <p>★★★★★</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">{productDetail[0].name}</p>
+            <p className="productName">{productDetail.name}</p>
             <p className="price">
-              {' '}
-              {priceToString(Math.round(productDetail[0].price))}
+              {priceToString(Math.round(productDetail.price))}
             </p>
             <p className="availableColors"> 블루/ 레드/ 블랙</p>
           </div>
@@ -179,7 +177,7 @@ const Itemdetail = () => {
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
-            {productDetail[0].stocksize
+            {productDetail.stocksize
               ?.filter(data => data.stock > 0)
               .map((item, idx) => (
                 <button
@@ -223,25 +221,25 @@ const Itemdetail = () => {
           </div>
           <div className="listFAQ">
             <p className="listUpperMargin">
-              <Link>
+              <Link to="/shippingrefund">
                 <TbTruckDelivery />
                 배송/반품
               </Link>
             </p>
             <p className="listUpperMargin">
-              <Link>
+              <Link to="/laundryinfo">
                 <RiErrorWarningLine />
                 세탁 및 취급 시 주의사항
               </Link>
             </p>
             <p className="listUpperMargin">
-              <Link>
+              <Link to="/qc">
                 <AiOutlineCheckCircle />
                 품질 보증 및 AS 정보
               </Link>
             </p>
             <p className="listUpperMargin">
-              <Link>
+              <Link to="/productassemblydate">
                 <AiOutlineCheck />
                 상품 제조연월 정보
               </Link>
