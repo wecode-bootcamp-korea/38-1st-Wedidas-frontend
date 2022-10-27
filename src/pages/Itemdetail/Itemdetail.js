@@ -16,7 +16,7 @@ const Itemdetail = () => {
   const [productSize, setProductSize] = useState('');
   const [readmore, setReadmore] = useState(false);
   const [buttonToggle, setButtonToggle] = useState('');
-  const { id } = useParams;
+  const { id } = useParams();
 
   const priceToString = price => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -39,7 +39,7 @@ const Itemdetail = () => {
   const tokenAuthorization = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.160:3000/products/${id}`)
+    fetch(`http://10.58.52.160:3000/products/detail/${id}`)
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
   }, [id]);
@@ -52,7 +52,7 @@ const Itemdetail = () => {
         authorization: tokenAuthorization,
       },
       body: JSON.stringify({
-        productId: productDetail[{ id }].id,
+        productId: productDetail[0].id,
         sizeId: productSize,
       }),
     })
@@ -74,10 +74,10 @@ const Itemdetail = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjQsImlhdCI6MTY2Njc4MjkzNywiZXhwIjoxNjY3NTYwNTM3fQ.CGpu7WbYq1-BGBX47SZG-jLkqeQgge-eYVCTbqdgJvI`,
+        authorization: tokenAuthorization,
       },
       body: JSON.stringify({
-        productId: productDetail[{ id }]?.id,
+        productId: productDetail[0]?.id,
       }),
     });
   };
@@ -88,11 +88,11 @@ const Itemdetail = () => {
         <div className="imageList">
           <img
             className="productThumbnail"
-            src={productDetail[{ id }]?.thumbnailUrl}
+            src={productDetail[0]?.thumbnailUrl}
             alt="mainimage"
           />
           {readmore &&
-            productDetail[{ id }]?.images.map(el => (
+            productDetail[0]?.images.map(el => (
               <img
                 className="additionalThumbnail"
                 key={el}
@@ -163,13 +163,13 @@ const Itemdetail = () => {
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
           <div className="categoryAndReview">
-            <p>{productDetail[{ id }]?.category}</p>
+            <p>{productDetail[0]?.category}</p>
             <p>★★★★★</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">{productDetail[{ id }]?.name}</p>
+            <p className="productName">{productDetail[0]?.name}</p>
             <p className="price">
-              {priceToString(Math.round(productDetail[{ id }]?.price))}
+              {priceToString(Math.round(productDetail[0]?.price))} 원
             </p>
             <p className="availableColors"> 블루/ 레드/ 블랙</p>
           </div>
@@ -177,14 +177,14 @@ const Itemdetail = () => {
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
-            {productDetail[{ id }]?.stocksize
+            {productDetail[0]?.stocksize
               ?.filter(data => data.stock > 0)
-              .map((item, idx) => (
+              .map(item => (
                 <button
                   value={item.id}
                   key={item.footSize}
                   className={
-                    'sizeButton' + (idx == buttonToggle ? 'active' : '')
+                    'sizeButton' + (item.id == buttonToggle ? 'active' : '')
                   }
                   onClick={e => {
                     saveSize(e);
