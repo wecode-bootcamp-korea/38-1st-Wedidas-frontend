@@ -11,8 +11,6 @@ const Login = () => {
 
   const emailRegex =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
   const onChangeUserInfoValue = event => {
     setUserInfoValue({
@@ -22,10 +20,7 @@ const Login = () => {
   };
   const handleOnsubmit = e => {
     e.preventDefault();
-    if (
-      emailRegex.test(userInfoValue.email) &&
-      passwordRegex.test(userInfoValue.password)
-    ) {
+    if (emailRegex.test(userInfoValue.email)) {
       fetch(`${api.signin}`, {
         method: 'POST',
         headers: {
@@ -43,8 +38,11 @@ const Login = () => {
           throw new Error('통신실패');
         })
         .then(data => {
-          if (data.message === 'INVALID_PASSWORD') {
-            alert('비밀번호를 확인해 주세요.');
+          if (
+            data.message === 'INVALID_PASSWORD' ||
+            data.message === 'INVALID_EMAIL'
+          ) {
+            alert('이메일과 비밀번호를 다시 확인해 주세요.');
           } else {
             localStorage.setItem('token', data.accessToken);
             navigate('/');
