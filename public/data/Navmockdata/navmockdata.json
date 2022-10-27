@@ -9,15 +9,15 @@
     "shoesCategory": [
       {
         "name": "오리지널스",
-        "url": "/itemlist/men/originals"
+        "url": "/itemlist/men/originals?offset=0&limit=8"
       },
       {
         "name": "슬리퍼",
-        "url": "/itemlist/men/slipper"
+        "url": "/itemlist/men/slipper?offset=0&limit=8"
       },
       {
         "name": "사커",
-        "url": "/itemlist/men/soccer"
+        "url": "/itemlist/men/soccer?offset=0&limit=8"
       }
     ],
     "classname": "mshoes"
@@ -102,15 +102,15 @@
     "shoesCategory": [
       {
         "name": "오리지널스",
-        "url": "/itemlist/women/originals"
+        "url": "/itemlist/women/originals?offset=0&limit=8"
       },
       {
         "name": "슬리퍼",
-        "url": "/itemlist/women/slipper"
+        "url": "/itemlist/women/slipper?offset=0&limit=8"
       },
       {
         "name": "사커",
-        "url": "/itemlist/women/soccer"
+        "url": "/itemlist/women/soccer?offset=0&limit=8"
       }
     ],
     "classname": "mshoes"
