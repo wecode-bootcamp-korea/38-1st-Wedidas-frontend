@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import WishProduct from './components/WishProduct';
 import Button from '../../components/Button/Button';
-import './Wishlist.scss';
 import { api } from '../../config';
+import './Wishlist.scss';
 
 const Wishlist = () => {
   const [wishItemList, setWishItemList] = useState([]);
