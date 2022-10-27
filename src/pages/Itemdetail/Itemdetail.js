@@ -38,10 +38,16 @@ const Itemdetail = () => {
   const tokenAuthorization = localStorage.getItem('token');
 
   useEffect(() => {
-    fetch(`http://10.58.52.160:3000/products/${id}`)
+    fetch('/data/itemditto.json')
       .then(data => data.json())
       .then(data => setProductDetail(data.data));
-  }, [id]);
+  }, []);
+
+  // useEffect(() => {
+  //   fetch(`http://10.58.52.160:3000/products/${id}`)
+  //     .then(data => data.json())
+  //     .then(data => setProductDetail(data.data));
+  // }, [id]);
 
   const sendtoCart = () => {
     fetch('http://10.58.52.114:3000/carts', {
@@ -69,14 +75,14 @@ const Itemdetail = () => {
   };
 
   const sendtoWishlist = () => {
-    fetch('http://10.58.52.114:3000/wishlists', {
+    fetch('http://10.58.52.78:3000/wishlists', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        authorization: tokenAuthorization,
+        authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjQsImlhdCI6MTY2Njc4MjkzNywiZXhwIjoxNjY3NTYwNTM3fQ.CGpu7WbYq1-BGBX47SZG-jLkqeQgge-eYVCTbqdgJvI`,
       },
       body: JSON.stringify({
-        productId: productDetail[0].id,
+        productId: productDetail[0]?.id,
       }),
     });
   };
@@ -87,11 +93,11 @@ const Itemdetail = () => {
         <div className="imageList">
           <img
             className="productThumbnail"
-            src={productDetail.thumbnailUrl}
+            src={productDetail[0]?.thumbnailUrl}
             alt="mainimage"
           />
           {readmore
-            ? productDetail.images.map(el => (
+            ? productDetail[0]?.images.map(el => (
                 <img
                   className="additionalThumbnail"
                   key={el}
@@ -163,13 +169,13 @@ const Itemdetail = () => {
       <div className="detailpageSelectSection">
         <div className="topMostUpperElement">
           <div className="categoryAndReview">
-            <p>{productDetail.category}</p>
+            <p>{productDetail[0]?.category}</p>
             <p>★★★★★</p>
           </div>
           <div className="titlePriceColor">
-            <p className="productName">{productDetail.name}</p>
+            <p className="productName">{productDetail[0]?.name}</p>
             <p className="price">
-              {priceToString(Math.round(productDetail.price))}
+              {priceToString(Math.round(productDetail[0]?.price))}
             </p>
             <p className="availableColors"> 블루/ 레드/ 블랙</p>
           </div>
@@ -177,7 +183,7 @@ const Itemdetail = () => {
         <div className="sizeSelector">
           <p className="availableSize"> 구입 가능한 사이즈</p>
           <div className="sizeButtonList">
-            {productDetail.stocksize
+            {productDetail[0]?.stocksize
               ?.filter(data => data.stock > 0)
               .map((item, idx) => (
                 <button
