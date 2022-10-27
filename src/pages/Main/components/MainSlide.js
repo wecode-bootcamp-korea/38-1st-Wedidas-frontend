@@ -61,7 +61,11 @@ const MainSlide = () => {
       <div className="slideContainer">
         <div className="slideWrap" ref={slideRef} style={{ width: width }}>
           {sources.map(source => (
-            <ItemProduct className="slideItem" key={source.id} data={source} />
+            <ItemProduct
+              className="slideItem"
+              key={source.productId}
+              data={source}
+            />
           ))}
         </div>
       </div>
