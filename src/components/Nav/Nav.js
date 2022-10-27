@@ -13,6 +13,8 @@ const Nav = () => {
   const [mockDataFetch, setMockDataFetch] = useState([]);
   const [wishlistFetch, setWishlistFetch] = useState([]);
   const [cartlistFetch, setCartlistFetch] = useState([]);
+  const [menShown, setMenShown] = useState(false);
+  const [womenShown, setWomenShown] = useState(false);
 
   const onSearch = event => {
     event.preventDefault();
@@ -52,11 +54,6 @@ const Nav = () => {
       .then(res => res.json())
       .then(data => setCartlistFetch(data.wishlists.length));
   }, []);
-
-  const [menShown, setMenShown] = useState(false);
-  const [womenShown, setWomenShown] = useState(false);
-
-  console.log(wishlistFetch);
 
   return (
     <div className="navComponent">
